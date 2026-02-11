@@ -268,11 +268,23 @@ TCS iON Career Edge – Young Professional
 
 <div>
 <form action="https://formsubmit.co/gandhishubhang09@gmail.com" method="POST">
-<input type="text" name="name" placeholder="Your Name" required>
-<input type="email" name="email" placeholder="Your Email" required>
-<textarea name="message" placeholder="Your Message" required></textarea>
-<button type="submit">Send Message</button>
+
+    <!-- Disable captcha -->
+    <input type="hidden" name="_captcha" value="false">
+
+    <!-- Redirect after submit -->
+    <input type="hidden" name="_next" value="https://shubhanggandhi.github.io/gandhishubhang09/#contact">
+
+    <input type="text" name="name" placeholder="Your Name" required>
+
+    <input type="email" name="email" placeholder="Your Email" required>
+
+    <textarea name="message" placeholder="Your Message" required></textarea>
+
+    <button type="submit">Send Message</button>
+
 </form>
+
 </div>
 </div>
 </section>
