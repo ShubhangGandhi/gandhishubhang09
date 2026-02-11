@@ -5,195 +5,248 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Shubhang Gandhi | Portfolio</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Segoe UI', sans-serif;
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Inter',sans-serif;
 }
 
-body {
-  background: #0f172a;
-  color: #e2e8f0;
-  scroll-behavior: smooth;
+body{
+  background:linear-gradient(135deg,#0f172a,#020617);
+  color:#e2e8f0;
+  scroll-behavior:smooth;
 }
 
-header {
-  text-align: center;
-  padding: 80px 20px;
-  background: linear-gradient(135deg, #0ea5e9, #2563eb);
+nav{
+  position:fixed;
+  width:100%;
+  top:0;
+  padding:15px 40px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:rgba(15,23,42,0.8);
+  backdrop-filter:blur(10px);
+  z-index:1000;
 }
 
-.profile-pic {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 4px solid white;
-  margin-bottom: 20px;
+nav a{
+  color:#e2e8f0;
+  text-decoration:none;
+  margin-left:20px;
+  font-weight:500;
+  transition:0.3s;
 }
 
-header h1 {
-  font-size: 2.5rem;
+nav a:hover{
+  color:#38bdf8;
 }
 
-header p {
-  margin: 10px 0 20px;
-  font-size: 1.2rem;
+header{
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:20px;
 }
 
-.btn {
-  padding: 10px 20px;
-  background: white;
-  color: black;
-  text-decoration: none;
-  border-radius: 6px;
-  font-weight: bold;
+.profile-pic{
+  width:160px;
+  height:160px;
+  border-radius:50%;
+  object-fit:cover;
+  border:4px solid #38bdf8;
+  margin-bottom:25px;
+  box-shadow:0 0 40px rgba(56,189,248,0.4);
 }
 
-section {
-  padding: 60px 20px;
-  max-width: 1000px;
-  margin: auto;
+header h1{
+  font-size:3rem;
+  font-weight:800;
 }
 
-h2 {
-  margin-bottom: 20px;
-  color: #38bdf8;
-  text-align: center;
+header p{
+  margin:15px 0 30px;
+  font-size:1.2rem;
+  color:#94a3b8;
 }
 
-.about p {
-  text-align: center;
-  max-width: 700px;
-  margin: auto;
+.btn{
+  padding:12px 28px;
+  background:#38bdf8;
+  border:none;
+  border-radius:30px;
+  color:#0f172a;
+  font-weight:600;
+  text-decoration:none;
+  transition:0.3s;
 }
 
-.skills ul {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  list-style: none;
-  gap: 10px;
-  margin-top: 20px;
+.btn:hover{
+  background:#0ea5e9;
+  transform:scale(1.05);
 }
 
-.skills li {
-  background: #1e293b;
-  padding: 10px;
-  border-radius: 6px;
-  text-align: center;
+section{
+  padding:100px 20px;
+  max-width:1100px;
+  margin:auto;
 }
 
-.projects {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-  margin-top: 20px;
+h2{
+  text-align:center;
+  margin-bottom:50px;
+  font-size:2rem;
 }
 
-.card {
-  background: #1e293b;
-  padding: 20px;
-  border-radius: 10px;
-  transition: 0.3s;
+.about p{
+  text-align:center;
+  max-width:800px;
+  margin:auto;
+  line-height:1.8;
+  color:#94a3b8;
 }
 
-.card:hover {
-  transform: translateY(-5px);
-  background: #334155;
+.skills{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:20px;
 }
 
-.contact {
-  text-align: center;
+.skill-card{
+  background:rgba(255,255,255,0.05);
+  padding:20px;
+  border-radius:12px;
+  text-align:center;
+  backdrop-filter:blur(10px);
+  transition:0.3s;
 }
 
-footer {
-  text-align: center;
-  padding: 20px;
-  background: #020617;
-  margin-top: 40px;
+.skill-card:hover{
+  transform:translateY(-8px);
+  background:rgba(56,189,248,0.1);
+}
+
+.projects{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:25px;
+}
+
+.project-card{
+  background:rgba(255,255,255,0.05);
+  padding:25px;
+  border-radius:15px;
+  transition:0.3s;
+  backdrop-filter:blur(10px);
+}
+
+.project-card:hover{
+  transform:translateY(-10px);
+  background:rgba(56,189,248,0.08);
+}
+
+.project-card h3{
+  margin-bottom:10px;
+}
+
+.project-card p{
+  color:#94a3b8;
+}
+
+.contact{
+  text-align:center;
+}
+
+.contact p{
+  margin:10px 0;
+}
+
+footer{
+  text-align:center;
+  padding:30px;
+  background:#020617;
+  color:#64748b;
 }
 </style>
 </head>
 
 <body>
 
+<nav>
+  <div><strong>Shubhang Gandhi</strong></div>
+  <div>
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
 <header>
-  <img src="https://i.postimg.cc/x1MzjLrJ/shubhang-gandhi.jpg" alt="Shubhang Gandhi" class="profile-pic">
+  <img src="https://i.postimg.cc/x1MzjLrJ/shubhang-gandhi.jpg" class="profile-pic">
   <h1>Shubhang Shrikant Gandhi</h1>
   <p>Electronics & Telecommunication Engineer | IoT | AI/ML | Embedded Systems</p>
-  <a href="#projects" class="btn">View Projects</a>
+  <a href="#projects" class="btn">Explore My Work</a>
 </header>
 
-<section class="about">
+<section id="about" class="about">
   <h2>About Me</h2>
   <p>
-    B.Tech E&TC student at PCCOE Pune with strong focus on hardware systems,
-    IoT development, embedded design, and AI-driven applications.
-    Passionate about building real-world engineering solutions.
+    B.Tech E&TC student at PCCOE Pune focused on designing intelligent
+    electronic systems, IoT applications, and AI-integrated hardware solutions.
+    Passionate about innovation, product development, and real-world impact.
   </p>
 </section>
 
-<section class="skills">
-  <h2>Skills</h2>
-  <ul>
-    <li>Python</li>
-    <li>Embedded C</li>
-    <li>MATLAB & Simulink</li>
-    <li>Arduino & IoT</li>
-    <li>PCB Design</li>
-    <li>Microcontrollers</li>
-    <li>AI / ML Basics</li>
-    <li>Circuit Design</li>
-  </ul>
+<section id="skills">
+  <h2>Technical Skills</h2>
+  <div class="skills">
+    <div class="skill-card">Python & Embedded C</div>
+    <div class="skill-card">MATLAB & Simulink</div>
+    <div class="skill-card">IoT & Arduino</div>
+    <div class="skill-card">PCB & Circuit Design</div>
+    <div class="skill-card">Microcontrollers</div>
+    <div class="skill-card">AI / ML Basics</div>
+  </div>
 </section>
 
 <section id="projects">
-  <h2>Projects</h2>
+  <h2>Featured Projects</h2>
   <div class="projects">
 
-    <div class="card">
+    <div class="project-card">
       <h3>Innovative Laboratory Power Supply</h3>
-      <p>Adjustable voltage & current limiting with protection circuits.</p>
+      <p>Regulated adjustable power supply with protection circuits and monitoring.</p>
     </div>
 
-    <div class="card">
+    <div class="project-card">
       <h3>Smart Health Monitoring System</h3>
-      <p>IoT-based real-time health monitoring with alerts.</p>
+      <p>IoT-based vital monitoring system with real-time alerts and visualization.</p>
     </div>
 
-    <div class="card">
+    <div class="project-card">
       <h3>CNC Plotter Machine</h3>
-      <p>Stepper motor-based precision 2D plotting system.</p>
-    </div>
-
-    <div class="card">
-      <h3>SafeNet</h3>
-      <p>Emergency detection and rapid alert generation system.</p>
-    </div>
-
-    <div class="card">
-      <h3>Gesture-to-Servo Mapping</h3>
-      <p>MATLAB-based contactless servo control system.</p>
-    </div>
-
-    <div class="card">
-      <h3>Automated Object Counter</h3>
-      <p>Sensor-based object detection and counting system.</p>
+      <p>Stepper motor controlled precision plotting using microcontroller logic.</p>
     </div>
 
   </div>
 </section>
 
-<section class="contact">
+<section id="contact" class="contact">
   <h2>Contact</h2>
   <p>Email: gandhishubhang09@gmail.com</p>
   <p>LinkedIn: linkedin.com/in/shubhang-gandhi</p>
 </section>
 
 <footer>
-  <p>© 2026 Shubhang Gandhi</p>
+  © 2026 Shubhang Gandhi | Built with passion ⚡
 </footer>
 
 </body>
