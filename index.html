@@ -83,8 +83,9 @@ nav{position:fixed;top:0;left:0;right:0;display:flex;align-items:center;justify-
 .hero-inner{display:grid;grid-template-columns:1fr auto;gap:60px;align-items:center;width:100%;max-width:1100px;margin:0 auto;position:relative;z-index:1;}
 .hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(0,240,255,0.06);border:1px solid rgba(0,240,255,0.2);border-radius:20px;padding:6px 14px;font-family:var(--font-mono);font-size:0.72rem;color:var(--cyan);margin-bottom:20px;letter-spacing:1px;}
 .hero-badge::before{content:'';width:6px;height:6px;background:var(--cyan);border-radius:50%;animation:pulse 1.5s ease infinite;}
-.hero-text h1{font-size:clamp(2.2rem,5vw,3.8rem);font-weight:800;line-height:1.1;margin-bottom:10px;}
+.hero-text h1{font-size:clamp(2rem,4.5vw,3.6rem);font-weight:800;line-height:1.15;margin-bottom:10px;white-space:nowrap;}
 .hero-text h1 .name-highlight{color:var(--cyan);}
+@media(max-width:600px){.hero-text h1{white-space:normal;}}
 .hero-role-line{
   display:flex;align-items:center;gap:10px;
   font-family:var(--font-mono);font-size:0.88rem;color:var(--muted);
@@ -95,8 +96,7 @@ nav{position:fixed;top:0;left:0;right:0;display:flex;align-items:center;justify-
 .hero-subtitle{font-family:var(--font-mono);font-size:0.88rem;color:var(--muted);margin-bottom:20px;min-height:22px;}
 .hero-subtitle .cursor{display:inline-block;width:2px;height:1em;background:var(--cyan);margin-left:2px;animation:blink 0.8s step-end infinite;vertical-align:text-bottom;}
 @keyframes blink{0%,100%{opacity:1;}50%{opacity:0;}}
-.hero-desc{max-width:560px;color:var(--muted);font-size:0.95rem;line-height:1.78;margin-bottom:32px;}
-.hero-desc strong{color:var(--text);}
+.hero-desc{max-width:560px;color:var(--muted);font-size:0.95rem;line-height:1.78;margin-bottom:32px;font-weight:400;}
 .hero-pill-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px;}
 .hero-pill{
   display:inline-flex;align-items:center;gap:6px;
@@ -464,7 +464,7 @@ footer{background:#030508;border-top:1px solid var(--border);padding:40px 5%;}
   <div class="hero-inner">
     <div class="hero-text">
       <div class="hero-badge">Open to Internships &amp; Research Collaborations</div>
-      <h1>Shubhang<br><span class="name-highlight">Gandhi</span></h1>
+      <h1><span class="name-highlight">Shubhang Gandhi</span></h1>
 
       <!-- Precise role line -->
       <div class="hero-role-line">
@@ -478,16 +478,16 @@ footer{background:#030508;border-top:1px solid var(--border);padding:40px 5%;}
       <div class="hero-subtitle"><span id="typing-text"></span><span class="cursor"></span></div>
 
       <p class="hero-desc">
-        Third-year <strong>Electronics &amp; Telecommunication Engineering</strong> student at
-        <strong>PCCoE, Pune</strong> — engineering systems that fuse hardware intelligence
-        with real-world impact. I design PCBs, write production-grade embedded firmware,
-        deploy edge-AI models on constrained silicon, and build IoT platforms that actually
-        ship. <strong>CGPA 8.91 · 25+ Projects · 2 Govt. of India Copyrights.</strong>
+        Third-year Electronics &amp; Telecommunication Engineering student at PCCoE, Pune —
+        engineering systems that fuse hardware precision with intelligent software to solve
+        real problems. I design PCBs, write production-grade embedded firmware, deploy
+        edge-AI on constrained silicon, and build IoT platforms that actually ship.
       </p>
 
       <!-- Precise capability pills -->
       <div class="hero-pill-row">
         <span class="hero-pill"><i class="fa fa-microchip"></i>ESP32 / Arduino / STM32</span>
+        <span class="hero-pill"><i class="fa fa-server"></i>Raspberry Pi</span>
         <span class="hero-pill"><i class="fa fa-drafting-compass"></i>Altium PCB Design</span>
         <span class="hero-pill"><i class="fa fa-brain"></i>Edge AI / TinyML</span>
         <span class="hero-pill"><i class="fa fa-wifi"></i>MQTT · UART · I2C · SPI</span>
@@ -506,6 +506,7 @@ footer{background:#030508;border-top:1px solid var(--border);padding:40px 5%;}
         <a href="mailto:gandhishubhang09@gmail.com" title="Email"><i class="fa fa-envelope"></i></a>
         <a href="https://shubhanggandhi.github.io/gandhishubhang09/" target="_blank" title="Website"><i class="fa fa-globe"></i></a>
       </div>
+    </div>
 
     <div class="hero-image-wrap">
       <div class="hero-img-ring2"></div>
@@ -587,10 +588,10 @@ footer{background:#030508;border-top:1px solid var(--border);padding:40px 5%;}
     <div class="skill-card">
       <div class="skill-card-header"><div class="skill-icon"><i class="fa fa-microchip"></i></div><h3>Embedded Systems</h3></div>
       <div class="skill-row"><div class="skill-info"><span>ESP32 / Arduino</span><span>88%</span></div><div class="skill-bar"><div class="skill-bar-fill" data-width="88"></div></div></div>
+      <div class="skill-row"><div class="skill-info"><span>Raspberry Pi (Linux / GPIO)</span><span>65%</span></div><div class="skill-bar"><div class="skill-bar-fill" data-width="65"></div></div></div>
       <div class="skill-row"><div class="skill-info"><span>Embedded C / FreeRTOS</span><span>78%</span></div><div class="skill-bar"><div class="skill-bar-fill" data-width="78"></div></div></div>
       <div class="skill-row"><div class="skill-info"><span>STM32 (Basics)</span><span>50%</span></div><div class="skill-bar"><div class="skill-bar-fill" data-width="50"></div></div></div>
-      <div class="skill-row"><div class="skill-info"><span>Interrupt-Driven Design</span><span>80%</span></div><div class="skill-bar"><div class="skill-bar-fill" data-width="80"></div></div></div>
-      <div class="tech-tags"><span class="tech-tag">ESP32</span><span class="tech-tag">Arduino</span><span class="tech-tag">FreeRTOS</span><span class="tech-tag">Interrupts</span><span class="tech-tag">GRBL</span></div>
+      <div class="tech-tags"><span class="tech-tag">ESP32</span><span class="tech-tag">Arduino</span><span class="tech-tag">Raspberry Pi</span><span class="tech-tag">FreeRTOS</span><span class="tech-tag">STM32</span><span class="tech-tag">GRBL</span></div>
     </div>
 
     <div class="skill-card">
@@ -1497,7 +1498,7 @@ footer{background:#030508;border-top:1px solid var(--border);padding:40px 5%;}
 <!-- FOOTER -->
 <footer>
   <div class="footer-inner">
-    <div class="footer-logo"></div>
+    <div class="footer-logo">Thank You !</div>
     <div class="footer-links">
       <a href="#about">About</a>
       <a href="#projects">Projects</a>
