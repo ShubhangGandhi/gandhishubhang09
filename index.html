@@ -3,332 +3,1985 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shubhang Gandhi | Electronics Engineer</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+<title>Shubhang Gandhi | Embedded Systems & Electronics Engineer</title>
+<meta name="description" content="Portfolio of Shubhang Gandhi – Electronics & Telecommunication Engineering student at PCCoE Pune. Specializing in Embedded Systems, IoT, AI/ML, and PCB Design.">
+<meta name="keywords" content="Shubhang Gandhi, Electronics Engineer, Embedded Systems, IoT, PCB Design, Arduino, ESP32, PCCoE Pune">
+<meta property="og:title" content="Shubhang Gandhi | Embedded Systems Engineer">
+<meta property="og:description" content="Engineering portfolio showcasing embedded systems, IoT, AI/ML and hardware projects.">
+<meta name="author" content="Shubhang Shrikant Gandhi">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif;}
-body{background:#070b14;color:#e6f1ff;overflow-x:hidden;scroll-behavior:smooth;}
-section{padding:100px 8%;}
-h2{font-size:2.5rem;margin-bottom:40px;}
-.highlight{color:#00f5ff;}
+/* ═══════════════════════════════════════════════
+   DESIGN TOKENS
+═══════════════════════════════════════════════ */
+:root{
+  --bg:#07090f;
+  --bg2:#0b0f1a;
+  --bg3:#0f1520;
+  --cyan:#00f0ff;
+  --cyan2:#00b8d4;
+  --green:#00ff88;
+  --purple:#8b5cf6;
+  --amber:#ffb347;
+  --red:#ff8080;
+  --text:#e2eaf5;
+  --muted:#7b92ad;
+  --border:rgba(0,240,255,0.12);
+  --card:rgba(15,21,32,0.9);
+  --font-mono:'JetBrains Mono',monospace;
+  --font-body:'Outfit',sans-serif;
+  --radius:14px;
+  --transition:0.35s cubic-bezier(0.4,0,0.2,1);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-body);background:var(--bg);color:var(--text);overflow-x:hidden;line-height:1.6;}
 
-nav{
-position:fixed;width:100%;top:0;
-display:flex;justify-content:space-between;
-padding:20px 8%;
-background:rgba(7,11,20,0.85);
-backdrop-filter:blur(10px);
-z-index:1000;
-}
-nav a{color:#e6f1ff;text-decoration:none;margin-left:25px;transition:0.3s;}
-nav a:hover{color:#00f5ff;}
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--cyan2);border-radius:2px;}
 
-.hero{
-height:100vh;
-display:flex;
-align-items:center;
-justify-content:space-between;
-padding:0 8%;
-}
-.hero-text h1{font-size:4rem;line-height:1.1;}
-.hero-text p{margin:25px 0;font-size:1.2rem;color:#9fb3c8;}
-.btn{
-padding:12px 28px;
-background:#00f5ff;
-color:#070b14;
-border-radius:30px;
-text-decoration:none;
-font-weight:600;
-transition:0.3s;
-}
-.btn:hover{transform:translateY(-3px);box-shadow:0 0 20px #00f5ff;}
-.hero-img{
-width:350px;height:350px;border-radius:50%;
-border:3px solid #00f5ff;
-box-shadow:0 0 40px #00f5ff55;
-object-fit:cover;
-animation:float 5s ease-in-out infinite;
-}
-@keyframes float{
-0%,100%{transform:translateY(0);}
-50%{transform:translateY(-15px);}
-}
+/* ── LOADER ── */
+#loader{position:fixed;inset:0;background:var(--bg);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity 0.6s ease,visibility 0.6s ease;}
+#loader.fade{opacity:0;visibility:hidden;}
+.loader-circuit{width:120px;height:120px;position:relative;margin-bottom:24px;}
+.loader-ring{position:absolute;inset:0;border:2px solid transparent;border-radius:50%;animation:spin 1.4s linear infinite;}
+.loader-ring:nth-child(1){border-top-color:var(--cyan);animation-duration:1.4s;}
+.loader-ring:nth-child(2){inset:12px;border-right-color:var(--green);animation-duration:1.8s;animation-direction:reverse;}
+.loader-ring:nth-child(3){inset:24px;border-bottom-color:var(--purple);animation-duration:2.2s;}
+.loader-dot{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:12px;height:12px;background:var(--cyan);border-radius:50%;box-shadow:0 0 20px var(--cyan);}
+.loader-text{font-family:var(--font-mono);font-size:0.8rem;color:var(--cyan);letter-spacing:3px;animation:pulse 1s ease infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.4;}}
 
-.grid{display:grid;gap:30px;}
-.skills-grid{grid-template-columns:repeat(auto-fit,minmax(300px,1fr));}
+/* ── GRID BG ── */
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,240,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,240,255,0.03) 1px,transparent 1px);background-size:50px 50px;pointer-events:none;z-index:0;}
 
-.card{
-background:rgba(255,255,255,0.03);
-padding:25px;border-radius:15px;
-border:1px solid rgba(0,245,255,0.15);
-transition:0.4s;
-opacity:0;
-transform:translateY(40px);
-}
-.card.show{
-opacity:1;
-transform:translateY(0);
-}
-.card:hover{
-transform:translateY(-8px);
-box-shadow:0 0 25px #00f5ff33;
-}
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:0 5%;height:64px;background:rgba(7,9,15,0.88);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);z-index:1000;}
+.nav-logo{font-family:var(--font-mono);font-size:1rem;color:var(--cyan);text-decoration:none;letter-spacing:1px;}
+.nav-logo span{color:var(--text);}
+.nav-links{display:flex;gap:6px;align-items:center;}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:0.78rem;font-family:var(--font-mono);padding:6px 11px;border-radius:6px;transition:var(--transition);position:relative;}
+.nav-links a:hover,.nav-links a.active{color:var(--cyan);}
+.nav-links a.active::after{content:'';position:absolute;bottom:-1px;left:11px;right:11px;height:2px;background:var(--cyan);border-radius:1px;}
+.nav-resume{background:transparent;border:1px solid var(--cyan);color:var(--cyan)!important;padding:6px 14px!important;border-radius:6px!important;}
+.nav-resume:hover{background:rgba(0,240,255,0.1)!important;}
+.hamburger{display:none;cursor:pointer;flex-direction:column;gap:5px;}
+.hamburger span{display:block;width:24px;height:2px;background:var(--cyan);transition:var(--transition);}
 
-.progress{
-height:6px;background:#1a2636;
-margin:10px 0 20px;border-radius:5px;
-overflow:hidden;
+/* ═══════════════════════════════════════════════
+   HERO
+═══════════════════════════════════════════════ */
+#hero{min-height:100vh;display:flex;align-items:center;padding:80px 5% 0;position:relative;overflow:hidden;}
+.hero-glow{position:absolute;top:-200px;right:-100px;width:700px;height:700px;background:radial-gradient(circle,rgba(0,240,255,0.06) 0%,transparent 70%);pointer-events:none;}
+.hero-glow2{position:absolute;bottom:-200px;left:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(139,92,246,0.05) 0%,transparent 70%);pointer-events:none;}
+.hero-inner{display:grid;grid-template-columns:1fr auto;gap:60px;align-items:center;width:100%;max-width:1100px;margin:0 auto;position:relative;z-index:1;}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(0,240,255,0.06);border:1px solid rgba(0,240,255,0.2);border-radius:20px;padding:6px 14px;font-family:var(--font-mono);font-size:0.72rem;color:var(--cyan);margin-bottom:20px;letter-spacing:1px;}
+.hero-badge::before{content:'';width:6px;height:6px;background:var(--cyan);border-radius:50%;animation:pulse 1.5s ease infinite;}
+.hero-text h1{font-size:clamp(2.2rem,5vw,3.8rem);font-weight:800;line-height:1.1;margin-bottom:10px;}
+.hero-text h1 .name-highlight{color:var(--cyan);}
+.hero-role-line{
+  display:flex;align-items:center;gap:10px;
+  font-family:var(--font-mono);font-size:0.88rem;color:var(--muted);
+  margin-bottom:6px;
 }
-.progress span{
-display:block;height:100%;
-background:linear-gradient(90deg,#00f5ff,#008cff);
-width:0;
-transition:width 2s ease;
+.hero-role-line .role-sep{color:rgba(0,240,255,0.3);}
+.hero-role-line .role-active{color:var(--cyan);}
+.hero-subtitle{font-family:var(--font-mono);font-size:0.88rem;color:var(--muted);margin-bottom:20px;min-height:22px;}
+.hero-subtitle .cursor{display:inline-block;width:2px;height:1em;background:var(--cyan);margin-left:2px;animation:blink 0.8s step-end infinite;vertical-align:text-bottom;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0;}}
+.hero-desc{max-width:560px;color:var(--muted);font-size:0.95rem;line-height:1.78;margin-bottom:32px;}
+.hero-desc strong{color:var(--text);}
+.hero-pill-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px;}
+.hero-pill{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(0,240,255,0.05);border:1px solid rgba(0,240,255,0.15);
+  border-radius:20px;padding:4px 12px;
+  font-family:var(--font-mono);font-size:0.68rem;color:var(--cyan);
+  letter-spacing:0.5px;
 }
+.hero-pill i{font-size:0.65rem;}
+.hero-buttons{display:flex;gap:14px;flex-wrap:wrap;}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--cyan);color:#07090f;padding:11px 24px;border-radius:8px;text-decoration:none;font-weight:700;font-size:0.9rem;transition:var(--transition);}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 8px 30px rgba(0,240,255,0.3);}
+.btn-outline{display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--cyan);border:1px solid rgba(0,240,255,0.4);padding:10px 22px;border-radius:8px;text-decoration:none;font-weight:600;font-size:0.9rem;transition:var(--transition);}
+.btn-outline:hover{background:rgba(0,240,255,0.07);transform:translateY(-3px);}
+.hero-social{display:flex;gap:12px;margin-top:24px;}
+.hero-social a{display:flex;align-items:center;justify-content:center;width:38px;height:38px;border:1px solid var(--border);border-radius:8px;color:var(--muted);text-decoration:none;font-size:1rem;transition:var(--transition);}
+.hero-social a:hover{border-color:var(--cyan);color:var(--cyan);transform:translateY(-3px);}
+.hero-image-wrap{position:relative;flex-shrink:0;}
+/* 
+   ┌─────────────────────────────────────────────┐
+   │  HOW TO ADD YOUR PROFILE PHOTO:              │
+   │  1. Upload photo to postimages.org           │
+   │  2. Copy the "Direct link" URL               │
+   │  3. Replace the src="" below with that URL   │
+   │  Example: src="https://i.postimg.cc/XXXX/photo.jpg"
+   └─────────────────────────────────────────────┘
+*/
+.hero-img{width:280px;height:280px;border-radius:50%;object-fit:cover;border:2px solid rgba(0,240,255,0.3);position:relative;z-index:2;animation:float 6s ease-in-out infinite;}
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-12px);}}
+.hero-img-ring{position:absolute;inset:-16px;border:1px dashed rgba(0,240,255,0.25);border-radius:50%;animation:spin 20s linear infinite;z-index:1;}
+.hero-img-ring2{position:absolute;inset:-32px;border:1px solid rgba(0,240,255,0.1);border-radius:50%;animation:spin 30s linear infinite reverse;z-index:1;}
+.hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:36px;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;max-width:560px;}
+.stat-item{padding:14px 16px;border-right:1px solid var(--border);text-align:center;}
+.stat-item:last-child{border-right:none;}
+.stat-number{font-family:var(--font-mono);font-size:1.4rem;font-weight:700;color:var(--cyan);display:block;}
+.stat-label{font-size:0.68rem;color:var(--muted);letter-spacing:0.5px;margin-top:2px;}
 
-.contact-grid{
-display:grid;grid-template-columns:1fr 1fr;gap:40px;
-}
-input,textarea{
-width:100%;padding:12px;margin-bottom:15px;
-background:#111827;border:1px solid #00f5ff33;
-color:#e6f1ff;border-radius:8px;
-}
-textarea{min-height:120px;}
-button{
-padding:12px;width:100%;
-background:#00f5ff;border:none;
-border-radius:30px;font-weight:600;
-cursor:pointer;
-}
-footer{text-align:center;padding:40px;background:#05080f;color:#7c9ab3;}
+/* ═══════════════════════════════════════════════
+   SECTION COMMON
+═══════════════════════════════════════════════ */
+section{padding:100px 5%;position:relative;z-index:1;}
+.section-header{margin-bottom:60px;}
+.section-tag{font-family:var(--font-mono);font-size:0.75rem;color:var(--cyan);letter-spacing:3px;text-transform:uppercase;margin-bottom:12px;display:block;}
+.section-title{font-size:clamp(1.8rem,3vw,2.6rem);font-weight:800;line-height:1.2;}
+.section-title .accent{color:var(--cyan);}
+.section-line{width:50px;height:3px;background:linear-gradient(90deg,var(--cyan),transparent);border-radius:2px;margin-top:14px;}
+.section-desc{color:var(--muted);max-width:600px;margin-top:14px;font-size:0.95rem;}
 
+/* ═══════════════════════════════════════════════
+   ABOUT
+═══════════════════════════════════════════════ */
+#about{background:var(--bg2);}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;}
+.about-text p{color:var(--muted);font-size:0.95rem;line-height:1.8;margin-bottom:18px;}
+.about-text p .highlight{color:var(--cyan);font-weight:600;}
+.about-info-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:28px;}
+.about-info-item{display:flex;align-items:center;gap:10px;font-size:0.85rem;color:var(--muted);}
+.about-info-item i{color:var(--cyan);width:16px;}
+.about-right{display:flex;flex-direction:column;gap:20px;}
+.about-quick-facts{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;}
+.fact-item{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.04);font-size:0.85rem;}
+.fact-item:last-child{border:none;padding-bottom:0;}
+.fact-label{color:var(--muted);}
+.fact-value{color:var(--text);font-weight:600;font-family:var(--font-mono);font-size:0.8rem;}
+
+/* ═══════════════════════════════════════════════
+   SKILLS
+═══════════════════════════════════════════════ */
+#skills{background:var(--bg);}
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;}
+.skill-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:28px;transition:var(--transition);opacity:0;transform:translateY(30px);}
+.skill-card.reveal{opacity:1;transform:translateY(0);}
+.skill-card:hover{border-color:rgba(0,240,255,0.3);transform:translateY(-6px);box-shadow:0 20px 40px rgba(0,0,0,0.3);}
+.skill-card-header{display:flex;align-items:center;gap:14px;margin-bottom:22px;}
+.skill-icon{width:40px;height:40px;background:rgba(0,240,255,0.08);border:1px solid rgba(0,240,255,0.2);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--cyan);font-size:1.1rem;flex-shrink:0;}
+.skill-card h3{font-size:1rem;font-weight:700;}
+.skill-row{margin-bottom:14px;}
+.skill-info{display:flex;justify-content:space-between;font-size:0.8rem;color:var(--muted);margin-bottom:6px;}
+.skill-info span:last-child{color:var(--cyan);font-family:var(--font-mono);}
+.skill-bar{height:5px;background:rgba(255,255,255,0.06);border-radius:3px;overflow:hidden;}
+.skill-bar-fill{height:100%;background:linear-gradient(90deg,var(--cyan),var(--cyan2));border-radius:3px;width:0;transition:width 1.4s cubic-bezier(0.4,0,0.2,1);position:relative;overflow:hidden;}
+.skill-bar-fill::after{content:'';position:absolute;top:0;left:-200%;width:200%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.3),transparent);animation:shimmer 2s ease infinite 1.5s;}
+@keyframes shimmer{to{left:200%;}}
+.tech-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;}
+.tech-tag{background:rgba(0,240,255,0.06);border:1px solid rgba(0,240,255,0.15);color:var(--cyan);font-family:var(--font-mono);font-size:0.7rem;padding:4px 10px;border-radius:4px;letter-spacing:0.5px;transition:var(--transition);}
+.tech-tag:hover{background:rgba(0,240,255,0.12);}
+
+/* ═══════════════════════════════════════════════
+   EXPERIENCE
+═══════════════════════════════════════════════ */
+#experience{background:var(--bg2);}
+.timeline{position:relative;max-width:800px;}
+.timeline::before{content:'';position:absolute;left:20px;top:0;bottom:0;width:1px;background:linear-gradient(180deg,var(--cyan),rgba(0,240,255,0.1));}
+.timeline-item{display:flex;gap:32px;margin-bottom:40px;opacity:0;transform:translateX(-30px);transition:var(--transition);}
+.timeline-item.reveal{opacity:1;transform:translateX(0);}
+.timeline-dot{width:41px;flex-shrink:0;display:flex;flex-direction:column;align-items:center;}
+.timeline-dot-inner{width:14px;height:14px;background:var(--cyan);border-radius:50%;border:2px solid var(--bg2);box-shadow:0 0 10px rgba(0,240,255,0.5);margin-top:4px;position:relative;z-index:1;flex-shrink:0;}
+.timeline-content{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px 28px;flex:1;transition:var(--transition);}
+.timeline-content:hover{border-color:rgba(0,240,255,0.25);transform:translateX(4px);}
+.timeline-header{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;margin-bottom:8px;}
+.timeline-title{font-size:1rem;font-weight:700;}
+.timeline-date{font-family:var(--font-mono);font-size:0.72rem;color:var(--cyan);background:rgba(0,240,255,0.06);border:1px solid rgba(0,240,255,0.15);padding:3px 10px;border-radius:4px;white-space:nowrap;}
+.timeline-org{font-size:0.82rem;color:var(--cyan);margin-bottom:12px;font-weight:600;}
+.timeline-desc{color:var(--muted);font-size:0.85rem;line-height:1.7;}
+.timeline-desc li{list-style:none;padding:3px 0;position:relative;padding-left:14px;}
+.timeline-desc li::before{content:'›';position:absolute;left:0;color:var(--cyan);font-weight:700;}
+
+/* ═══════════════════════════════════════════════
+   PROJECTS
+═══════════════════════════════════════════════ */
+#projects{background:var(--bg);}
+.project-filter{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:40px;}
+.filter-btn{background:transparent;border:1px solid var(--border);color:var(--muted);font-family:var(--font-mono);font-size:0.75rem;padding:7px 16px;border-radius:6px;cursor:pointer;transition:var(--transition);letter-spacing:0.5px;}
+.filter-btn:hover,.filter-btn.active{background:rgba(0,240,255,0.08);border-color:rgba(0,240,255,0.4);color:var(--cyan);}
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:24px;}
+.project-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:var(--transition);opacity:0;transform:translateY(30px);display:flex;flex-direction:column;}
+.project-card.reveal{opacity:1;transform:translateY(0);}
+.project-card:hover{border-color:rgba(0,240,255,0.3);transform:translateY(-8px);box-shadow:0 24px 48px rgba(0,0,0,0.4);}
+.project-card.hidden{display:none;}
+.project-img-wrap{position:relative;height:185px;background:var(--bg3);overflow:hidden;}
+
+/*
+  ══════════════════════════════════════════════════
+  HOW TO ADD PROJECT IMAGES (postimages.org method):
+  ══════════════════════════════════════════════════
+  1. Go to https://postimages.org
+  2. Upload your project photo
+  3. Copy the "Direct link" — looks like:
+       https://i.postimg.cc/XXXXXXXX/your-image.jpg
+  4. In the project card below, find the comment:
+       <!-- PROJECT IMAGE: [project name] -->
+  5. Replace the <div class="project-img-placeholder">
+     block with:
+       <img src="YOUR_POSTIMAGE_DIRECT_LINK"
+            alt="Project Name"
+            class="project-img-full">
+  6. The image will fill the card header perfectly.
+
+  CSS for when you add real images:
+*/
+.project-img-full{width:100%;height:100%;object-fit:cover;transition:var(--transition);opacity:0.85;}
+.project-card:hover .project-img-full{transform:scale(1.06);opacity:1;}
+
+.project-img-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:linear-gradient(135deg,rgba(0,240,255,0.04) 0%,rgba(139,92,246,0.04) 100%);}
+.project-img-placeholder i{font-size:2.5rem;color:rgba(0,240,255,0.3);}
+.project-img-placeholder span{font-family:var(--font-mono);font-size:0.7rem;color:rgba(0,240,255,0.3);letter-spacing:1px;text-align:center;padding:0 10px;}
+.project-img-placeholder .img-hint{font-size:0.6rem;color:rgba(0,240,255,0.18);margin-top:4px;font-style:italic;}
+.project-category-badge{position:absolute;top:12px;left:12px;font-family:var(--font-mono);font-size:0.65rem;padding:4px 10px;border-radius:4px;letter-spacing:0.5px;font-weight:600;}
+.badge-embedded{background:rgba(0,240,255,0.12);color:var(--cyan);border:1px solid rgba(0,240,255,0.25);}
+.badge-iot{background:rgba(0,255,136,0.1);color:var(--green);border:1px solid rgba(0,255,136,0.2);}
+.badge-aiml{background:rgba(139,92,246,0.12);color:var(--purple);border:1px solid rgba(139,92,246,0.25);}
+.badge-power{background:rgba(255,165,0,0.1);color:var(--amber);border:1px solid rgba(255,165,0,0.2);}
+.badge-research{background:rgba(255,100,100,0.1);color:var(--red);border:1px solid rgba(255,100,100,0.2);}
+.badge-pcb{background:rgba(0,255,136,0.08);color:#4ade80;border:1px solid rgba(0,255,136,0.2);}
+.copyright-badge{position:absolute;top:12px;right:12px;background:rgba(0,0,0,0.7);border:1px solid rgba(0,240,255,0.3);color:var(--cyan);font-size:0.65rem;padding:3px 8px;border-radius:4px;font-family:var(--font-mono);}
+.project-body{padding:22px 22px 14px;flex:1;display:flex;flex-direction:column;}
+.project-title{font-size:0.97rem;font-weight:700;margin-bottom:8px;line-height:1.3;}
+.project-desc{color:var(--muted);font-size:0.82rem;line-height:1.6;margin-bottom:16px;flex:1;}
+.project-tech{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px;}
+.project-tech span{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);color:var(--muted);font-family:var(--font-mono);font-size:0.65rem;padding:3px 8px;border-radius:4px;}
+.project-links{display:flex;gap:10px;padding-top:14px;border-top:1px solid rgba(255,255,255,0.05);}
+.project-link{display:flex;align-items:center;gap:6px;font-size:0.78rem;color:var(--muted);text-decoration:none;transition:var(--transition);}
+.project-link:hover{color:var(--cyan);}
+
+/* ═══════════════════════════════════════════════
+   MODAL
+═══════════════════════════════════════════════ */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:2000;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;visibility:hidden;transition:var(--transition);backdrop-filter:blur(8px);}
+.modal-overlay.open{opacity:1;visibility:visible;}
+.modal-box{background:var(--bg2);border:1px solid var(--border);border-radius:20px;max-width:720px;width:100%;max-height:88vh;overflow-y:auto;padding:36px;transform:translateY(20px);transition:var(--transition);position:relative;}
+.modal-overlay.open .modal-box{transform:translateY(0);}
+.modal-close{position:absolute;top:18px;right:18px;background:rgba(255,255,255,0.05);border:1px solid var(--border);color:var(--muted);width:36px;height:36px;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;transition:var(--transition);}
+.modal-close:hover{color:var(--text);border-color:var(--cyan);}
+.modal-title{font-size:1.4rem;font-weight:800;margin-bottom:6px;}
+.modal-meta{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px;}
+.modal-desc{color:var(--muted);font-size:0.9rem;line-height:1.75;margin-bottom:18px;}
+.modal-section-label{font-family:var(--font-mono);font-size:0.7rem;color:var(--cyan);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;margin-top:18px;}
+/* Modal image slot */
+.modal-img-wrap{width:100%;height:220px;border-radius:10px;overflow:hidden;margin-bottom:20px;background:var(--bg3);}
+.modal-img-wrap img{width:100%;height:100%;object-fit:cover;}
+.modal-img-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;}
+.modal-img-placeholder i{font-size:2.8rem;color:rgba(0,240,255,0.2);}
+.modal-img-placeholder p{font-size:0.72rem;color:rgba(0,240,255,0.2);font-family:var(--font-mono);}
+
+/* ═══════════════════════════════════════════════
+   EDUCATION (combined with certs & achievements)
+═══════════════════════════════════════════════ */
+#education{background:var(--bg2);}
+.education-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;}
+.edu-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:28px;transition:var(--transition);opacity:0;transform:translateY(30px);}
+.edu-card.reveal{opacity:1;transform:translateY(0);}
+.edu-card:hover{border-color:rgba(0,240,255,0.25);transform:translateY(-4px);}
+.edu-icon{width:44px;height:44px;background:rgba(0,240,255,0.08);border:1px solid rgba(0,240,255,0.2);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--cyan);font-size:1.2rem;margin-bottom:18px;}
+.edu-card h3{font-size:1rem;font-weight:700;margin-bottom:4px;}
+.edu-card .edu-sub{font-size:0.82rem;color:var(--muted);margin-bottom:12px;}
+.edu-years{font-family:var(--font-mono);font-size:0.72rem;color:var(--cyan);background:rgba(0,240,255,0.06);border:1px solid rgba(0,240,255,0.15);padding:3px 10px;border-radius:4px;display:inline-block;margin-bottom:12px;}
+.cgpa-bar-wrap{margin-top:12px;}
+.cgpa-bar-label{display:flex;justify-content:space-between;font-size:0.78rem;color:var(--muted);margin-bottom:6px;}
+.cgpa-bar-label span:last-child{color:var(--cyan);font-family:var(--font-mono);}
+.cgpa-bar{height:6px;background:rgba(255,255,255,0.06);border-radius:3px;overflow:hidden;}
+.cgpa-bar-fill{height:100%;background:linear-gradient(90deg,var(--cyan),var(--green));border-radius:3px;width:0;transition:width 1.6s cubic-bezier(0.4,0,0.2,1);}
+
+/* ── CERT + ACHIEVEMENT COMBINED ── */
+.certs-achievements-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+  gap:16px;
+  margin-top:40px;
+}
+.ca-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:18px 20px;
+  display:flex;align-items:flex-start;gap:14px;
+  transition:var(--transition);
+  opacity:0;transform:translateY(20px);
+  position:relative;
+}
+.ca-card.reveal{opacity:1;transform:translateY(0);}
+.ca-card:hover{border-color:rgba(0,240,255,0.25);transform:translateY(-3px);}
+.ca-icon{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:0.95rem;flex-shrink:0;}
+.ca-icon.cert-color{background:rgba(0,240,255,0.07);color:var(--cyan);border:1px solid rgba(0,240,255,0.18);}
+.ca-icon.ach-gold{background:rgba(255,179,71,0.1);color:#ffb347;border:1px solid rgba(255,179,71,0.25);}
+.ca-icon.ach-silver{background:rgba(192,192,192,0.08);color:#c0c0c0;border:1px solid rgba(192,192,192,0.2);}
+.ca-icon.ach-purple{background:rgba(139,92,246,0.1);color:var(--purple);border:1px solid rgba(139,92,246,0.22);}
+.ca-icon.ach-green{background:rgba(0,255,136,0.07);color:var(--green);border:1px solid rgba(0,255,136,0.18);}
+.ca-type-pill{
+  position:absolute;top:10px;right:12px;
+  font-family:var(--font-mono);font-size:0.58rem;
+  padding:2px 7px;border-radius:3px;letter-spacing:0.5px;
+}
+.pill-cert{background:rgba(0,240,255,0.07);color:var(--cyan);border:1px solid rgba(0,240,255,0.15);}
+.pill-ach{background:rgba(255,179,71,0.08);color:#ffb347;border:1px solid rgba(255,179,71,0.2);}
+.pill-copy{background:rgba(139,92,246,0.1);color:var(--purple);border:1px solid rgba(139,92,246,0.25);}
+.ca-name{font-size:0.85rem;font-weight:700;margin-bottom:3px;line-height:1.3;padding-right:50px;}
+.ca-issuer{font-size:0.72rem;color:var(--muted);}
+
+/* ═══════════════════════════════════════════════
+   CONTACT
+═══════════════════════════════════════════════ */
+#contact{background:var(--bg);}
+.contact-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:60px;align-items:start;}
+.contact-info{display:flex;flex-direction:column;gap:16px;}
+.contact-item{display:flex;align-items:center;gap:16px;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px 20px;text-decoration:none;color:inherit;transition:var(--transition);}
+.contact-item:hover{border-color:rgba(0,240,255,0.3);transform:translateX(4px);}
+.contact-item-icon{width:38px;height:38px;background:rgba(0,240,255,0.08);border-radius:9px;display:flex;align-items:center;justify-content:center;color:var(--cyan);font-size:0.95rem;flex-shrink:0;}
+.contact-item-label{font-size:0.72rem;color:var(--muted);margin-bottom:2px;}
+.contact-item-value{font-size:0.88rem;font-weight:600;}
+.contact-form{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:32px;}
+.form-group{margin-bottom:18px;}
+.form-group label{display:block;font-size:0.78rem;color:var(--muted);margin-bottom:8px;font-family:var(--font-mono);letter-spacing:0.5px;}
+.form-control{width:100%;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);color:var(--text);padding:11px 14px;border-radius:8px;font-family:var(--font-body);font-size:0.88rem;transition:var(--transition);outline:none;}
+.form-control:focus{border-color:rgba(0,240,255,0.4);background:rgba(0,240,255,0.03);}
+textarea.form-control{min-height:110px;resize:vertical;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.btn-submit{width:100%;background:var(--cyan);border:none;color:#07090f;padding:13px;border-radius:8px;font-weight:700;font-size:0.9rem;font-family:var(--font-body);cursor:pointer;transition:var(--transition);display:flex;align-items:center;justify-content:center;gap:8px;}
+.btn-submit:hover{transform:translateY(-3px);box-shadow:0 8px 30px rgba(0,240,255,0.3);}
+
+/* ═══════════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════════ */
+footer{background:#030508;border-top:1px solid var(--border);padding:40px 5%;}
+.footer-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;max-width:1100px;margin:0 auto;}
+.footer-logo{font-family:var(--font-mono);font-size:0.85rem;color:var(--cyan);}
+.footer-links{display:flex;gap:20px;}
+.footer-links a{color:var(--muted);text-decoration:none;font-size:0.82rem;transition:var(--transition);}
+.footer-links a:hover{color:var(--cyan);}
+.footer-copy{font-size:0.78rem;color:var(--muted);text-align:center;width:100%;margin-top:16px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.04);}
+.footer-copy span{color:var(--cyan);}
+
+/* ── SCROLL TOP ── */
+#scrollTop{position:fixed;bottom:28px;right:28px;width:42px;height:42px;background:rgba(0,240,255,0.1);border:1px solid rgba(0,240,255,0.3);border-radius:10px;color:var(--cyan);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;transition:var(--transition);opacity:0;visibility:hidden;z-index:500;}
+#scrollTop.visible{opacity:1;visibility:visible;}
+#scrollTop:hover{background:rgba(0,240,255,0.18);transform:translateY(-3px);}
+
+/* ═══════════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════════ */
 @media(max-width:900px){
-.hero{flex-direction:column;text-align:center;}
-.hero-img{margin-top:30px;}
-.contact-grid{grid-template-columns:1fr;}
+  .hero-stats{grid-template-columns:repeat(2,1fr);}
 }
+@media(max-width:768px){
+  .nav-links{display:none;position:absolute;top:64px;left:0;right:0;flex-direction:column;align-items:stretch;background:var(--bg);border-bottom:1px solid var(--border);padding:12px 20px;gap:4px;}
+  .nav-links.open{display:flex;}
+  .nav-links a{padding:10px 12px;border-radius:6px;}
+  .hamburger{display:flex;}
+  .hero-inner{grid-template-columns:1fr;text-align:center;}
+  .hero-image-wrap{display:flex;justify-content:center;}
+  .hero-img{width:200px;height:200px;}
+  .hero-buttons{justify-content:center;}
+  .hero-social{justify-content:center;}
+  .hero-pill-row{justify-content:center;}
+  .hero-stats{grid-template-columns:repeat(2,1fr);}
+  .about-grid{grid-template-columns:1fr;}
+  .about-info-grid{grid-template-columns:1fr;}
+  .education-grid{grid-template-columns:1fr;}
+  .contact-grid{grid-template-columns:1fr;}
+  .form-row{grid-template-columns:1fr;}
+  section{padding:70px 5%;}
+}
+@media(max-width:480px){
+  .hero-stats{grid-template-columns:1fr 1fr;}
+  .stat-item{border-right:none!important;border-bottom:1px solid var(--border);}
+  .stat-item:nth-child(odd){border-right:1px solid var(--border)!important;}
+}
+
+/* ── REVEAL ── */
+.reveal-item{opacity:0;transform:translateY(30px);transition:opacity 0.6s ease,transform 0.6s ease;}
+.reveal-item.reveal{opacity:1;transform:translateY(0);}
+
+/* ── section divider ── */
+.sub-section-title{
+  font-family:var(--font-mono);font-size:0.75rem;color:var(--cyan);
+  letter-spacing:3px;text-transform:uppercase;
+  margin:50px 0 24px;display:flex;align-items:center;gap:14px;
+}
+.sub-section-title::after{content:'';flex:1;height:1px;background:var(--border);}
 </style>
 </head>
-
 <body>
 
-<nav>
-<div><strong>||श्री गुरुदेव दत्त||<span class="highlight"></div>
-<div>
-<a href="#about">About</a>
-<a href="#skills">Skills</a>
-<a href="#experience">Experience</a>
-<a href="#projects">Projects</a>
-<a href="#education">Education</a>
-<a href="#contact">Contact</a>
+<!-- LOADER -->
+<div id="loader">
+  <div class="loader-circuit">
+    <div class="loader-ring"></div>
+    <div class="loader-ring"></div>
+    <div class="loader-ring"></div>
+    <div class="loader-dot"></div>
+  </div>
+  <div class="loader-text">INITIALIZING . . .</div>
 </div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="projectModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()"><i class="fa fa-times"></i></button>
+    <div id="modal-content"></div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">SG<span>.dev</span></a>
+  <div class="nav-links" id="navLinks">
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#experience">Experience</a>
+    <a href="#projects">Projects</a>
+    <a href="#education">Education</a>
+    <a href="#contact">Contact</a>
+    <a href="Shubhang_Gandhi_Resume__APRIL_2026___pdf.pdf" target="_blank" class="nav-resume"><i class="fa fa-download"></i> Resume</a>
+  </div>
+  <div class="hamburger" id="hamburger" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </div>
 </nav>
 
-<section class="hero">
-<div class="hero-text">
-<h1>Shubhang <span class="highlight">Gandhi</span></h1>
-<p id="typing"></p>
-<a href="#projects" class="btn">Explore My Work</a>
-</div>
-<img src="https://i.postimg.cc/x1MzjLrJ/shubhang-gandhi.jpg" class="hero-img">
+<!-- ═══════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-badge">Open to Internships &amp; Research Collaborations</div>
+      <h1>Shubhang<br><span class="name-highlight">Gandhi</span></h1>
+
+      <!-- Precise role line -->
+      <div class="hero-role-line">
+        <span class="role-active">Embedded Systems Engineer</span>
+        <span class="role-sep">|</span>
+        <span>IoT Developer</span>
+        <span class="role-sep">|</span>
+        <span>Edge-AI Builder</span>
+      </div>
+
+      <div class="hero-subtitle"><span id="typing-text"></span><span class="cursor"></span></div>
+
+      <p class="hero-desc">
+        Third-year <strong>Electronics &amp; Telecommunication Engineering</strong> student at
+        <strong>PCCoE, Pune</strong> — engineering systems that fuse hardware intelligence
+        with real-world impact. I design PCBs, write production-grade embedded firmware,
+        deploy edge-AI models on constrained silicon, and build IoT platforms that actually
+        ship. <strong>CGPA 8.91 · 25+ Projects · 2 Govt. of India Copyrights.</strong>
+      </p>
+
+      <!-- Precise capability pills -->
+      <div class="hero-pill-row">
+        <span class="hero-pill"><i class="fa fa-microchip"></i>ESP32 / Arduino / STM32</span>
+        <span class="hero-pill"><i class="fa fa-drafting-compass"></i>Altium PCB Design</span>
+        <span class="hero-pill"><i class="fa fa-brain"></i>Edge AI / TinyML</span>
+        <span class="hero-pill"><i class="fa fa-wifi"></i>MQTT · UART · I2C · SPI</span>
+        <span class="hero-pill"><i class="fa fa-bolt"></i>Power Electronics</span>
+        <span class="hero-pill"><i class="fab fa-python"></i>Python · MATLAB</span>
+      </div>
+
+      <div class="hero-buttons">
+        <a href="#projects" class="btn-primary"><i class="fa fa-microchip"></i> View Projects</a>
+        <a href="#contact" class="btn-outline"><i class="fa fa-envelope"></i> Get In Touch</a>
+        <a href="Shubhang_Gandhi_Resume__APRIL_2026___pdf.pdf" download class="btn-outline"><i class="fa fa-download"></i> Resume</a>
+      </div>
+      <div class="hero-social">
+        <a href="https://linkedin.com/in/shubhang-gandhi" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://github.com/shubhanggandhi" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+        <a href="mailto:gandhishubhang09@gmail.com" title="Email"><i class="fa fa-envelope"></i></a>
+        <a href="https://shubhanggandhi.github.io/gandhishubhang09/" target="_blank" title="Website"><i class="fa fa-globe"></i></a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-number" data-target="25">0</span>
+          <div class="stat-label">Projects</div>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number" data-target="2">0</span>
+          <div class="stat-label">Copyrights</div>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number" data-target="6">0</span>
+          <div class="stat-label">Certifications</div>
+        </div>
+        <div class="stat-item" style="border-right:none;">
+          <span class="stat-number" data-target="891" data-display="8.91">0</span>
+          <div class="stat-label">CGPA / 10</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-image-wrap">
+      <div class="hero-img-ring2"></div>
+      <div class="hero-img-ring"></div>
+      <!--
+        PROFILE PHOTO:
+        Replace the src below with your postimages.org direct link.
+        Example: src="https://i.postimg.cc/x1MzjLrJ/shubhang-gandhi.jpg"
+      -->
+      <img src="https://i.postimg.cc/x1MzjLrJ/shubhang-gandhi.jpg" alt="Shubhang Gandhi" class="hero-img">
+    </div>
+  </div>
 </section>
 
+<!-- ═══════════════════════════════════════════
+     ABOUT
+═══════════════════════════════════════════ -->
 <section id="about">
-<h2>About <span class="highlight">Me</span></h2>
-<p style="max-width:800px;color:#9fb3c8;">
-Third-year Electronics & Telecommunication Engineering student at PCCOE Pune (CGPA: 8.91/10). Passionate about embedded systems, IoT development, AI/ML integration, and product-based innovation. Experienced in building scalable hardware-software systems and turning engineering concepts into functional prototypes.
-</p>
+  <div class="section-header">
+    <span class="section-tag">01 // ABOUT</span>
+    <h2 class="section-title">About <span class="accent">Me</span></h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>
+        I'm a <span class="highlight">third-year Electronics &amp; Telecommunication Engineering</span> student
+        at Pimpri Chinchwad College of Engineering, Pune — deeply passionate about systems that merge
+        hardware precision with intelligent software to solve real human problems.
+      </p>
+      <p>
+        My work spans <span class="highlight">embedded firmware design</span>, IoT platforms, edge-AI
+        deployment on constrained hardware, PCB layout with Altium Designer, and real-time signal
+        processing. I don't just build prototypes — I engineer systems with proper protection circuits,
+        calibrated sensors, and clean, interrupt-driven firmware architecture ready for the real world.
+      </p>
+      <p>
+        I've registered <span class="highlight">two copyrights with the Government of India</span> for
+        original engineering products, qualified for SPPU Avishkar (state-level research), and actively
+        compete at national technical events. I speak fluent English, Hindi, Marathi, and Gujarati —
+        making collaboration across India effortless.
+      </p>
+      <div class="about-info-grid">
+        <div class="about-info-item"><i class="fa fa-map-marker-alt"></i> Pune, Maharashtra</div>
+        <div class="about-info-item"><i class="fa fa-university"></i> PCCoE, Pune (PCET)</div>
+        <div class="about-info-item"><i class="fa fa-code-branch"></i> Batch 2023–2027</div>
+        <div class="about-info-item"><i class="fa fa-language"></i> EN / HI / MR / GU</div>
+        <div class="about-info-item"><i class="fa fa-copyright"></i> 2 Govt. of India Copyrights</div>
+        <div class="about-info-item"><i class="fa fa-circle" style="color:var(--green);font-size:0.5rem;"></i>&nbsp;Available for Opportunities</div>
+      </div>
+    </div>
+    <div class="about-right">
+      <div class="about-quick-facts">
+        <div class="fact-item"><span class="fact-label">Degree</span><span class="fact-value">B.Tech – E&amp;TC Engineering</span></div>
+        <div class="fact-item"><span class="fact-label">Specialization</span><span class="fact-value">Embedded Systems &amp; IoT</span></div>
+        <div class="fact-item"><span class="fact-label">CGPA</span><span class="fact-value" style="color:var(--cyan);">8.91 / 10</span></div>
+        <div class="fact-item"><span class="fact-label">Copyrights</span><span class="fact-value">2 (Govt. of India)</span></div>
+        <div class="fact-item"><span class="fact-label">Open to</span><span class="fact-value">Internships / Research</span></div>
+        <div class="fact-item"><span class="fact-label">Core Stack</span><span class="fact-value">ESP32 · Altium · MATLAB</span></div>
+        <div class="fact-item"><span class="fact-label">Protocols</span><span class="fact-value">UART · I2C · SPI · MQTT</span></div>
+        <div class="fact-item"><span class="fact-label">Status</span><span class="fact-value" style="color:var(--cyan);">● Available</span></div>
+      </div>
+    </div>
+  </div>
 </section>
 
+<!-- ═══════════════════════════════════════════
+     SKILLS
+═══════════════════════════════════════════ -->
 <section id="skills">
-<h2>Technical <span class="highlight">Arsenal</span></h2>
-<div class="grid skills-grid">
+  <div class="section-header">
+    <span class="section-tag">02 // SKILLS</span>
+    <h2 class="section-title">Technical <span class="accent">Arsenal</span></h2>
+    <div class="section-line"></div>
+    <p class="section-desc">Hardware, firmware, and software capabilities — built through real projects, not just coursework.</p>
+  </div>
+  <div class="skills-grid">
 
-<div class="card">
-<h3>Programming</h3>
-Python<div class="progress"><span data-width="85%"></span></div>
-C / Embedded C<div class="progress"><span data-width="75%"></span></div>
-Verilog Basics<div class="progress"><span data-width="60%"></span></div>
-</div>
+    <div class="skill-card">
+      <div class="skill-card-header"><div class="skill-icon"><i class="fa fa-microchip"></i></div><h3>Embedded Systems</h3></div>
+      <div class="skill-row"><div class="skill-info"><span>ESP32 / Arduino</span><span>88%</span></div><div class="skill-bar"><div class="skill-bar-fill" data-width="88"></div></div></div>
+      <div class="skill-row"><div class="skill-info"><span>Embedded C / FreeRTOS</span><span>78%</span></div><div class="skill-bar"><div class="skill-bar-fill" data-width="78"></div></div></div>
+      <div class="skill-row"><div class="skill-info"><span>STM32 (Basics)</span><span>50%</span></div><div class="skill-bar"><div class="skill-bar-fill" data-width="50"></div></div></div>
+      <div class="skill-row"><div class="skill-info"><span>Interrupt-Driven Design</span><span>80%</span></div><div class="skill-bar"><div class="skill-bar-fill" data-width="80"></div></div></div>
+      <div class="tech-tags"><span class="tech-tag">ESP32</span><span class="tech-tag">Arduino</span><span class="tech-tag">FreeRTOS</span><span class="tech-tag">Interrupts</span><span class="tech-tag">GRBL</span></div>
+    </div>
 
-<div class="card">
-<h3>Hardware & IoT</h3>
-Arduino<div class="progress"><span data-width="85%"></span></div>
-PCB Design (Altium)<div class="progress"><span data-width="70%"></span></div>
-IoT Communication<div class="progress"><span data-width="80%"></span></div>
-</div>
+    <div class="skill-card">
+      <div class="skill-card-header"><div class="skill-icon"><i class="fa fa-wifi"></i></div><h3>IoT &amp; Communication Protocols</h3></div>
+      <div class="skill-row"><div class="skill-info"><span>Wi-Fi / HTTP / MQTT</span><span>82%</span></div><div class="skill-bar"><div class="skill-bar-fill" data-width="82"></div></div></div>
+      <div class="skill-row"><div class="skill-info"><span>UART / I2C / SPI</span><span>80%</span></div><div class="skill-bar"><div class="skill-bar-fill" data-width="80"></div></div></div>
+      <div class="skill-row"><div class="skill-info"><span>GSM / GPS</span><span>65%</span></div><div class="skill-bar"><div class="skill-bar-fill" data-width="65"></div></div></div>
+      <div class="skill-row"><div class="skill-info"><span>Blynk / ThingSpeak / REST</span><span>70%</span></div><div class="skill-bar"><div class="skill-bar-fill" data-width="70"></div></div></div>
+      <div class="tech-tags"><span class="tech-tag">UART</span><span class="tech-tag">I2C</span><span class="tech-tag">SPI</span><span class="tech-tag">GSM</span><span class="tech-tag">MQTT</span></div>
+    </div>
 
-</div>
+    <div class="skill-card">
+      <div class="skill-card-header"><div class="skill-icon"><i class="fa fa-drafting-compass"></i></div><h3>PCB &amp; Hardware Design</h3></div>
+      <div class="skill-row"><div class="skill-info"><span>Altium Designer</span><span>72%</span></div><div class="skill-bar"><div class="skill-bar-fill" data-width="72"></div></div></div>
+      <div class="skill-row"><div class="skill-info"><span>Proteus / Multisim</span><span>78%</span></div><div class="skill-bar"><div class="skill-bar-fill" data-width="78"></div></div></div>
+      <div class="skill-row"><div class="skill-info"><span>Circuit Design &amp; Schematic</span><span>80%</span></div><div class="skill-bar"><div class="skill-bar-fill" data-width="80"></div></div></div>
+      <div class="skill-row"><div class="skill-info"><span>Protection Circuit Design</span><span>74%</span></div><div class="skill-bar"><div class="skill-bar-fill" data-width="74"></div></div></div>
+      <div class="tech-tags"><span class="tech-tag">Altium</span><span class="tech-tag">Proteus</span><span class="tech-tag">PCB Proto</span><span class="tech-tag">Zero-PCB</span></div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-card-header"><div class="skill-icon"><i class="fa fa-brain"></i></div><h3>AI / ML &amp; Programming</h3></div>
+      <div class="skill-row"><div class="skill-info"><span>Python / scikit-learn</span><span>82%</span></div><div class="skill-bar"><div class="skill-bar-fill" data-width="82"></div></div></div>
+      <div class="skill-row"><div class="skill-info"><span>MATLAB / Simulink</span><span>70%</span></div><div class="skill-bar"><div class="skill-bar-fill" data-width="70"></div></div></div>
+      <div class="skill-row"><div class="skill-info"><span>Edge AI / CNN Inference</span><span>60%</span></div><div class="skill-bar"><div class="skill-bar-fill" data-width="60"></div></div></div>
+      <div class="skill-row"><div class="skill-info"><span>Embedded C / C++ (Arduino)</span><span>76%</span></div><div class="skill-bar"><div class="skill-bar-fill" data-width="76"></div></div></div>
+      <div class="tech-tags"><span class="tech-tag">Python</span><span class="tech-tag">pandas</span><span class="tech-tag">NumPy</span><span class="tech-tag">TinyML</span><span class="tech-tag">Tkinter</span></div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-card-header"><div class="skill-icon"><i class="fa fa-bolt"></i></div><h3>Power Electronics</h3></div>
+      <div class="skill-row"><div class="skill-info"><span>Power Supply Design</span><span>75%</span></div><div class="skill-bar"><div class="skill-bar-fill" data-width="75"></div></div></div>
+      <div class="skill-row"><div class="skill-info"><span>Low-Power Embedded Design</span><span>68%</span></div><div class="skill-bar"><div class="skill-bar-fill" data-width="68"></div></div></div>
+      <div class="skill-row"><div class="skill-info"><span>MOSFET &amp; Protection Circuits</span><span>72%</span></div><div class="skill-bar"><div class="skill-bar-fill" data-width="72"></div></div></div>
+      <div class="skill-row"><div class="skill-info"><span>DC-AC Conversion</span><span>65%</span></div><div class="skill-bar"><div class="skill-bar-fill" data-width="65"></div></div></div>
+      <div class="tech-tags"><span class="tech-tag">Regulation</span><span class="tech-tag">MOSFET</span><span class="tech-tag">Li-ion</span><span class="tech-tag">Thermal Design</span></div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-card-header"><div class="skill-icon"><i class="fa fa-tools"></i></div><h3>Tools &amp; Platforms</h3></div>
+      <div class="skill-row"><div class="skill-info"><span>Git / GitHub</span><span>70%</span></div><div class="skill-bar"><div class="skill-bar-fill" data-width="70"></div></div></div>
+      <div class="skill-row"><div class="skill-info"><span>VS Code / Arduino IDE</span><span>85%</span></div><div class="skill-bar"><div class="skill-bar-fill" data-width="85"></div></div></div>
+      <div class="skill-row"><div class="skill-info"><span>Vivado (Basics)</span><span>40%</span></div><div class="skill-bar"><div class="skill-bar-fill" data-width="40"></div></div></div>
+      <div class="skill-row"><div class="skill-info"><span>MATLAB Onramp / Simulink</span><span>68%</span></div><div class="skill-bar"><div class="skill-bar-fill" data-width="68"></div></div></div>
+      <div class="tech-tags"><span class="tech-tag">Git</span><span class="tech-tag">Vivado</span><span class="tech-tag">LaTeX</span><span class="tech-tag">Canva</span><span class="tech-tag">MATLAB</span></div>
+    </div>
+
+  </div>
 </section>
 
+<!-- ═══════════════════════════════════════════
+     EXPERIENCE
+═══════════════════════════════════════════ -->
 <section id="experience">
-<h2>Professional <span class="highlight">Experience</span></h2>
-<div class="grid skills-grid">
+  <div class="section-header">
+    <span class="section-tag">03 // EXPERIENCE</span>
+    <h2 class="section-title">Professional <span class="accent">Journey</span></h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="timeline">
 
-<div class="card">
-<h3>AI & ML Intern – Elevate Labs (May 2025 – June 2025)</h3>
-<p>Implemented machine learning models and learned full ML workflows including data preprocessing, training, validation, and optimization using Python.</p>
-</div>
+    <div class="timeline-item">
+      <div class="timeline-dot"><div class="timeline-dot-inner"></div></div>
+      <div class="timeline-content">
+        <div class="timeline-header">
+          <div class="timeline-title">Research Intern – Blind Guidance System</div>
+          <span class="timeline-date">May 2025 – Feb 2026</span>
+        </div>
+        <div class="timeline-org">Pimpri Chinchwad College of Engineering · Onsite</div>
+        <ul class="timeline-desc">
+          <li>Engineered an embedded assistive-navigation system using Arduino Nano and dual HC-SR04 ultrasonic modules for real-time obstacle localization.</li>
+          <li>Implemented interrupt-driven control logic, sensor fusion, and low-latency distance acquisition pipelines.</li>
+          <li>Optimized sensing accuracy through calibration, noise filtering, and real-time signal processing.</li>
+        </ul>
+      </div>
+    </div>
 
-<div class="card">
-<h3>Python Intern – CodSoft (Aug 2024 – Sep 2024)</h3>
-<p>Built Tkinter-based GUI applications (To-Do List, Contact Book) and improved algorithmic problem-solving capabilities.</p>
-</div>
+    <div class="timeline-item">
+      <div class="timeline-dot"><div class="timeline-dot-inner"></div></div>
+      <div class="timeline-content">
+        <div class="timeline-header">
+          <div class="timeline-title">AI &amp; Machine Learning Intern</div>
+          <span class="timeline-date">May 2025 – June 2025</span>
+        </div>
+        <div class="timeline-org">Elevate Labs · Remote</div>
+        <ul class="timeline-desc">
+          <li>Implemented supervised ML workflows — preprocessing pipelines, feature engineering, feature scaling, and model-validation methodologies.</li>
+          <li>Worked with Python, pandas, NumPy, and scikit-learn for data-driven embedded-AI system development.</li>
+          <li>Performed EDA, model optimization, and performance evaluation for intelligent inference systems.</li>
+        </ul>
+      </div>
+    </div>
 
-<div class="card">
-<h3>Research Project – Blind Guidance System</h3>
-<p>Developing assistive navigation technology integrating sensors and embedded logic for visually impaired users.</p>
-</div>
+    <div class="timeline-item">
+      <div class="timeline-dot"><div class="timeline-dot-inner"></div></div>
+      <div class="timeline-content">
+        <div class="timeline-header">
+          <div class="timeline-title">Design Team Member</div>
+          <span class="timeline-date">Jan 2025 – Sep 2025</span>
+        </div>
+        <div class="timeline-org">Microsoft Learn Student Chapter, PCCoE · Onsite</div>
+        <ul class="timeline-desc">
+          <li>Designed engineering visualization assets and technical architecture diagrams for inter-college events.</li>
+          <li>Collaborated with multidisciplinary teams for technical documentation and hardware presentation design.</li>
+        </ul>
+      </div>
+    </div>
 
-</div>
+    <div class="timeline-item">
+      <div class="timeline-dot"><div class="timeline-dot-inner"></div></div>
+      <div class="timeline-content">
+        <div class="timeline-header">
+          <div class="timeline-title">Python Programming Intern</div>
+          <span class="timeline-date">Aug 2024 – Sep 2024</span>
+        </div>
+        <div class="timeline-org">CodSoft · Remote</div>
+        <ul class="timeline-desc">
+          <li>Built Tkinter-based GUI applications including To-Do List, Calculator, and Contact Book.</li>
+          <li>Strengthened Python problem-solving through algorithmic tasks and hands-on deliverables.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
 </section>
 
+<!-- ═══════════════════════════════════════════
+     PROJECTS  (25+ cards)
+═══════════════════════════════════════════ -->
 <section id="projects">
-<h2>All <span class="highlight">Projects</span></h2>
-<div class="grid skills-grid">
+  <div class="section-header">
+    <span class="section-tag">04 // PROJECTS</span>
+    <h2 class="section-title">Project <span class="accent">Portfolio</span></h2>
+    <div class="section-line"></div>
+    <p class="section-desc">25+ hardware and software projects spanning embedded systems, IoT, AI/ML, power electronics, and control systems.</p>
+  </div>
 
-<div class="card">
-<h3>Innovative Laboratory Power Supply</h3>
-<p>Adjustable voltage & current limiting power supply with protection circuits and monitoring. Copyright registered.</p>
-</div>
+  <div class="project-filter">
+    <button class="filter-btn active" data-filter="all">All Projects</button>
+    <button class="filter-btn" data-filter="embedded">Embedded</button>
+    <button class="filter-btn" data-filter="iot">IoT</button>
+    <button class="filter-btn" data-filter="aiml">AI / ML</button>
+    <button class="filter-btn" data-filter="power">Power Electronics</button>
+    <button class="filter-btn" data-filter="pcb">PCB Design</button>
+    <button class="filter-btn" data-filter="research">Research</button>
+  </div>
 
-<div class="card">
-<h3>Smart Health Monitoring System</h3>
-<p>IoT-based vital monitoring system with real-time alerts and visualization dashboard. Copyright registered.</p>
-</div>
+  <div class="projects-grid" id="projectsGrid">
 
-<div class="card">
-<h3>CNC Plotter Machine</h3>
-<p>Microcontroller-based motion control system executing G-code for 2D precision plotting.</p>
-</div>
+    <!-- ── 01 ── -->
+    <!-- PROJECT IMAGE 01: ESP32-CAM Face Recognition
+         Replace the placeholder block below with:
+         <img src="YOUR_POSTIMAGE_LINK" alt="ESP32-CAM Face Recognition" class="project-img-full">
+    -->
+    <div class="project-card" data-category="aiml embedded" data-index="0">
+      <div class="project-img-wrap">
+        <div class="project-img-placeholder">
+          <i class="fa fa-camera"></i>
+          <span>ESP32-CAM · FaceNet · FreeRTOS</span>
+          <span class="img-hint">[ Add image: postimages.org → direct link ]</span>
+        </div>
+        <span class="project-category-badge badge-aiml">AI / ML</span>
+      </div>
+      <div class="project-body">
+        <div class="project-title">ESP32-CAM Offline Face Recognition System</div>
+        <p class="project-desc">Fully offline edge-AI access-control platform using ESP32-CAM and FreeRTOS. Achieved 96% recognition accuracy with 126ms inference latency using quantized INT8 FaceNet models on constrained hardware.</p>
+        <div class="project-tech"><span>ESP32-CAM</span><span>FreeRTOS</span><span>FaceNet INT8</span><span>CNN</span><span>OLED</span><span>Relay</span></div>
+        <div class="project-links"><a href="#" class="project-link" onclick="openModal(0);return false;"><i class="fa fa-expand"></i> Details</a></div>
+      </div>
+    </div>
 
-<div class="card">
-<h3>SafeNet</h3>
-<p>Emergency detection and alert generation system integrating sensors and communication modules.</p>
-</div>
+    <!-- ── 02 ── -->
+    <!-- PROJECT IMAGE 02: Lab Power Supply -->
+    <div class="project-card" data-category="power pcb" data-index="1">
+      <div class="project-img-wrap">
+        <div class="project-img-placeholder">
+          <i class="fa fa-bolt"></i>
+          <span>PCB · Regulation · Protection</span>
+          <span class="img-hint">[ Add image: postimages.org → direct link ]</span>
+        </div>
+        <span class="project-category-badge badge-power">Power Electronics</span>
+        <span class="copyright-badge">© Registered</span>
+      </div>
+      <div class="project-body">
+        <div class="project-title">Innovative Laboratory Power Supply</div>
+        <p class="project-desc">Copyright-registered regulated lab power supply with adjustable voltage and current-limiting. Features OV/OC/short-circuit/reverse-polarity/thermal-shutdown protection with Zero-PCB grounding topology.</p>
+        <div class="project-tech"><span>PCB Design</span><span>Altium</span><span>Regulation</span><span>MOSFET</span><span>Protection</span></div>
+        <div class="project-links"><a href="#" class="project-link" onclick="openModal(1);return false;"><i class="fa fa-expand"></i> Details</a></div>
+      </div>
+    </div>
 
-<div class="card">
-<h3>Gesture-to-Servo Mapping</h3>
-<p>MATLAB/Simulink-based gesture-controlled servo motor actuation for contactless control systems.</p>
-</div>
+    <!-- ── 03 ── -->
+    <!-- PROJECT IMAGE 03: Smart Health Monitor -->
+    <div class="project-card" data-category="iot embedded" data-index="2">
+      <div class="project-img-wrap">
+        <div class="project-img-placeholder">
+          <i class="fa fa-heartbeat"></i>
+          <span>MAX30100 · BMP180 · IoT Alerts</span>
+          <span class="img-hint">[ Add image: postimages.org → direct link ]</span>
+        </div>
+        <span class="project-category-badge badge-iot">IoT</span>
+        <span class="copyright-badge">© Registered</span>
+      </div>
+      <div class="project-body">
+        <div class="project-title">Smart Health Monitoring System</div>
+        <p class="project-desc">Copyright-registered portable IoT physiological monitor integrating MAX30100 pulse-oximeter and BMP180 for SpO2, heart rate, and temperature. Emergency-alert architecture with guardian SMS notifications.</p>
+        <div class="project-tech"><span>MAX30100</span><span>BMP180</span><span>ESP32</span><span>Li-ion</span><span>SMS Alerts</span></div>
+        <div class="project-links"><a href="#" class="project-link" onclick="openModal(2);return false;"><i class="fa fa-expand"></i> Details</a></div>
+      </div>
+    </div>
 
-<div class="card">
-<h3>Automated Object Counter</h3>
-<p>Sensor-based counting system for automated object detection and tracking.</p>
-</div>
+    <!-- ── 04 ── -->
+    <!-- PROJECT IMAGE 04: Blind Guidance System -->
+    <div class="project-card" data-category="research embedded" data-index="3">
+      <div class="project-img-wrap">
+        <div class="project-img-placeholder">
+          <i class="fa fa-assistive-listening-systems"></i>
+          <span>Arduino · Dual HC-SR04 · Sensor Fusion</span>
+          <span class="img-hint">[ Add image: postimages.org → direct link ]</span>
+        </div>
+        <span class="project-category-badge badge-research">Research</span>
+      </div>
+      <div class="project-body">
+        <div class="project-title">Blind Guidance System</div>
+        <p class="project-desc">Faculty-guided assistive navigation technology using Arduino Nano and dual HC-SR04 ultrasonic modules for real-time 3D obstacle mapping and directional hazard detection for visually impaired users.</p>
+        <div class="project-tech"><span>Arduino Nano</span><span>HC-SR04</span><span>Sensor Fusion</span><span>Interrupt-Driven</span></div>
+        <div class="project-links"><a href="#" class="project-link" onclick="openModal(3);return false;"><i class="fa fa-expand"></i> Details</a></div>
+      </div>
+    </div>
 
-<div class="card">
-<h3>Smart Cleaner Robot</h3>
-<p>Autonomous robotic platform integrating motor drivers and obstacle detection sensors.</p>
-</div>
+    <!-- ── 05 ── -->
+    <!-- PROJECT IMAGE 05: CNC Plotter -->
+    <div class="project-card" data-category="embedded" data-index="4">
+      <div class="project-img-wrap">
+        <div class="project-img-placeholder">
+          <i class="fa fa-drafting-compass"></i>
+          <span>G-code · GRBL · NEMA17</span>
+          <span class="img-hint">[ Add image: postimages.org → direct link ]</span>
+        </div>
+        <span class="project-category-badge badge-embedded">Embedded</span>
+      </div>
+      <div class="project-body">
+        <div class="project-title">2-Axis CNC Plotter Machine</div>
+        <p class="project-desc">G-code based CNC plotter using Arduino UNO and GRBL firmware. Integrated NEMA17 steppers, A4988 drivers, and SG90 servo with calibrated microstepping achieving ±0.9mm positional accuracy.</p>
+        <div class="project-tech"><span>Arduino UNO</span><span>GRBL</span><span>NEMA17</span><span>A4988</span><span>G-Code</span></div>
+        <div class="project-links"><a href="#" class="project-link" onclick="openModal(4);return false;"><i class="fa fa-expand"></i> Details</a></div>
+      </div>
+    </div>
 
-<div class="card">
-<h3>Wireless Surveillance Camera</h3>
-<p>IoT-enabled monitoring system with remote streaming capability.</p>
-</div>
+    <!-- ── 06 ── -->
+    <!-- PROJECT IMAGE 06: SafeNet -->
+    <div class="project-card" data-category="iot embedded" data-index="5">
+      <div class="project-img-wrap">
+        <div class="project-img-placeholder">
+          <i class="fa fa-shield-alt"></i>
+          <span>ESP32 · GSM · GPS · Motion</span>
+          <span class="img-hint">[ Add image: postimages.org → direct link ]</span>
+        </div>
+        <span class="project-category-badge badge-iot">IoT</span>
+      </div>
+      <div class="project-body">
+        <div class="project-title">SafeNet — Emergency Monitoring System</div>
+        <p class="project-desc">Multi-sensor embedded emergency platform using ESP32, GSM, GPS, and motion sensors. Interrupt-driven emergency alert with SMS-based distress notification and real-time GPS location tracking.</p>
+        <div class="project-tech"><span>ESP32</span><span>GSM</span><span>GPS</span><span>Motion Sensors</span><span>SMS</span></div>
+        <div class="project-links"><a href="#" class="project-link" onclick="openModal(5);return false;"><i class="fa fa-expand"></i> Details</a></div>
+      </div>
+    </div>
 
-</div>
+    <!-- ── 07 ── -->
+    <!-- PROJECT IMAGE 07: Gesture Servo -->
+    <div class="project-card" data-category="embedded aiml" data-index="6">
+      <div class="project-img-wrap">
+        <div class="project-img-placeholder">
+          <i class="fa fa-hand-paper"></i>
+          <span>MATLAB · Simulink · Servo Control</span>
+          <span class="img-hint">[ Add image: postimages.org → direct link ]</span>
+        </div>
+        <span class="project-category-badge badge-embedded">Embedded</span>
+      </div>
+      <div class="project-body">
+        <div class="project-title">Gesture-to-Servo Command Mapping</div>
+        <p class="project-desc">MATLAB/Simulink-based contactless gesture control system mapping hand movements to servo motor actions. Vision-based gesture recognition with real-time control loop for assistive robotics applications.</p>
+        <div class="project-tech"><span>MATLAB</span><span>Simulink</span><span>Servo</span><span>Gesture Recognition</span></div>
+        <div class="project-links"><a href="#" class="project-link" onclick="openModal(6);return false;"><i class="fa fa-expand"></i> Details</a></div>
+      </div>
+    </div>
+
+    <!-- ── 08 ── -->
+    <!-- PROJECT IMAGE 08: Mini Inverter -->
+    <div class="project-card" data-category="power embedded" data-index="7">
+      <div class="project-img-wrap">
+        <div class="project-img-placeholder">
+          <i class="fa fa-plug"></i>
+          <span>MOSFET · Oscillator · Transformer</span>
+          <span class="img-hint">[ Add image: postimages.org → direct link ]</span>
+        </div>
+        <span class="project-category-badge badge-power">Power Electronics</span>
+      </div>
+      <div class="project-body">
+        <div class="project-title">Mini DC-to-AC Inverter</div>
+        <p class="project-desc">DC-to-AC mini inverter using oscillator-driven MOSFET switching for low-power AC output generation. Covers power conversion, switching control, and transformer-based voltage amplification.</p>
+        <div class="project-tech"><span>MOSFET</span><span>Oscillator</span><span>Transformer</span><span>Power Conversion</span></div>
+        <div class="project-links"><a href="#" class="project-link" onclick="openModal(7);return false;"><i class="fa fa-expand"></i> Details</a></div>
+      </div>
+    </div>
+
+    <!-- ── 09 ── -->
+    <!-- PROJECT IMAGE 09: Wireless Camera -->
+    <div class="project-card" data-category="iot embedded" data-index="8">
+      <div class="project-img-wrap">
+        <div class="project-img-placeholder">
+          <i class="fa fa-video"></i>
+          <span>ESP32-CAM · Wi-Fi · HTTP Server</span>
+          <span class="img-hint">[ Add image: postimages.org → direct link ]</span>
+        </div>
+        <span class="project-category-badge badge-iot">IoT</span>
+      </div>
+      <div class="project-body">
+        <div class="project-title">Wireless Surveillance Camera</div>
+        <p class="project-desc">IoT-enabled remote monitoring system using ESP32-CAM with Wi-Fi streaming. Supports real-time video feed via local HTTP web dashboard — no cloud dependency, fully self-hosted.</p>
+        <div class="project-tech"><span>ESP32-CAM</span><span>Wi-Fi</span><span>HTTP Server</span><span>OV2640</span></div>
+        <div class="project-links"><a href="#" class="project-link" onclick="openModal(8);return false;"><i class="fa fa-expand"></i> Details</a></div>
+      </div>
+    </div>
+
+    <!-- ── 10 ── -->
+    <!-- PROJECT IMAGE 10: Smart Irrigation -->
+    <div class="project-card" data-category="iot embedded" data-index="9">
+      <div class="project-img-wrap">
+        <div class="project-img-placeholder">
+          <i class="fa fa-seedling"></i>
+          <span>Soil Sensor · Relay · Blynk</span>
+          <span class="img-hint">[ Add image: postimages.org → direct link ]</span>
+        </div>
+        <span class="project-category-badge badge-iot">IoT</span>
+      </div>
+      <div class="project-body">
+        <div class="project-title">Smart Irrigation System</div>
+        <p class="project-desc">Automated soil-moisture sensing irrigation controller using ESP32, capacitive soil sensors, relay-driven pump, and Blynk cloud dashboard for remote monitoring and threshold-based auto-watering.</p>
+        <div class="project-tech"><span>ESP32</span><span>Soil Sensor</span><span>Relay</span><span>Blynk</span><span>MQTT</span></div>
+        <div class="project-links"><a href="#" class="project-link" onclick="openModal(9);return false;"><i class="fa fa-expand"></i> Details</a></div>
+      </div>
+    </div>
+
+    <!-- ── 11 ── -->
+    <!-- PROJECT IMAGE 11: RFID Access Control -->
+    <div class="project-card" data-category="embedded" data-index="10">
+      <div class="project-img-wrap">
+        <div class="project-img-placeholder">
+          <i class="fa fa-id-card"></i>
+          <span>MFRC522 · RFID · Access Control</span>
+          <span class="img-hint">[ Add image: postimages.org → direct link ]</span>
+        </div>
+        <span class="project-category-badge badge-embedded">Embedded</span>
+      </div>
+      <div class="project-body">
+        <div class="project-title">RFID-Based Access Control System</div>
+        <p class="project-desc">Card-based security system using MFRC522 RFID module with Arduino, relay-controlled door lock, buzzer alert, OLED feedback display, and authorized UID whitelist stored in EEPROM.</p>
+        <div class="project-tech"><span>MFRC522</span><span>Arduino</span><span>RFID</span><span>EEPROM</span><span>OLED</span><span>Relay</span></div>
+        <div class="project-links"><a href="#" class="project-link" onclick="openModal(10);return false;"><i class="fa fa-expand"></i> Details</a></div>
+      </div>
+    </div>
+
+    <!-- ── 12 ── -->
+    <!-- PROJECT IMAGE 12: Temperature Logger -->
+    <div class="project-card" data-category="iot embedded" data-index="11">
+      <div class="project-img-wrap">
+        <div class="project-img-placeholder">
+          <i class="fa fa-thermometer-half"></i>
+          <span>DHT22 · ThingSpeak · Data Logging</span>
+          <span class="img-hint">[ Add image: postimages.org → direct link ]</span>
+        </div>
+        <span class="project-category-badge badge-iot">IoT</span>
+      </div>
+      <div class="project-body">
+        <div class="project-title">IoT Temperature &amp; Humidity Logger</div>
+        <p class="project-desc">DHT22-based environmental monitoring node pushing real-time temperature and humidity data to ThingSpeak cloud dashboard over Wi-Fi with alert triggers and CSV export capability.</p>
+        <div class="project-tech"><span>DHT22</span><span>ESP8266</span><span>ThingSpeak</span><span>HTTP</span><span>Data Logging</span></div>
+        <div class="project-links"><a href="#" class="project-link" onclick="openModal(11);return false;"><i class="fa fa-expand"></i> Details</a></div>
+      </div>
+    </div>
+
+    <!-- ── 13 ── -->
+    <!-- PROJECT IMAGE 13: Line Follower Robot -->
+    <div class="project-card" data-category="embedded" data-index="12">
+      <div class="project-img-wrap">
+        <div class="project-img-placeholder">
+          <i class="fa fa-robot"></i>
+          <span>IR Sensors · L298N · PID Control</span>
+          <span class="img-hint">[ Add image: postimages.org → direct link ]</span>
+        </div>
+        <span class="project-category-badge badge-embedded">Embedded</span>
+      </div>
+      <div class="project-body">
+        <div class="project-title">Line-Following Robot</div>
+        <p class="project-desc">Autonomous line-follower robot with 5-channel IR sensor array, L298N dual H-bridge motor driver, and PID control loop for smooth, high-speed track navigation with minimal oscillation.</p>
+        <div class="project-tech"><span>Arduino</span><span>IR Array</span><span>L298N</span><span>PID</span><span>DC Motors</span></div>
+        <div class="project-links"><a href="#" class="project-link" onclick="openModal(12);return false;"><i class="fa fa-expand"></i> Details</a></div>
+      </div>
+    </div>
+
+    <!-- ── 14 ── -->
+    <!-- PROJECT IMAGE 14: Obstacle Avoider -->
+    <div class="project-card" data-category="embedded" data-index="13">
+      <div class="project-img-wrap">
+        <div class="project-img-placeholder">
+          <i class="fa fa-car"></i>
+          <span>HC-SR04 · Servo · Autonomous Bot</span>
+          <span class="img-hint">[ Add image: postimages.org → direct link ]</span>
+        </div>
+        <span class="project-category-badge badge-embedded">Embedded</span>
+      </div>
+      <div class="project-body">
+        <div class="project-title">Autonomous Obstacle-Avoiding Robot</div>
+        <p class="project-desc">Autonomous robot using HC-SR04 ultrasonic sensor on a servo-mounted turret for 180° scanning. Real-time path selection algorithm avoids obstacles dynamically with L298N motor control.</p>
+        <div class="project-tech"><span>Arduino</span><span>HC-SR04</span><span>SG90</span><span>L298N</span><span>Motor Driver</span></div>
+        <div class="project-links"><a href="#" class="project-link" onclick="openModal(13);return false;"><i class="fa fa-expand"></i> Details</a></div>
+      </div>
+    </div>
+
+    <!-- ── 15 ── -->
+    <!-- PROJECT IMAGE 15: Digital Multimeter -->
+    <div class="project-card" data-category="embedded pcb" data-index="14">
+      <div class="project-img-wrap">
+        <div class="project-img-placeholder">
+          <i class="fa fa-tachometer-alt"></i>
+          <span>ADS1115 · ADC · Measurement</span>
+          <span class="img-hint">[ Add image: postimages.org → direct link ]</span>
+        </div>
+        <span class="project-category-badge badge-pcb">PCB Design</span>
+      </div>
+      <div class="project-body">
+        <div class="project-title">Digital Multimeter (Arduino-Based)</div>
+        <p class="project-desc">Portable digital multimeter measuring voltage, current, and resistance using ADS1115 16-bit ADC with auto-ranging, OLED display, and custom PCB layout with shunt resistor calibration.</p>
+        <div class="project-tech"><span>ADS1115</span><span>Arduino</span><span>OLED</span><span>ADC</span><span>PCB Layout</span></div>
+        <div class="project-links"><a href="#" class="project-link" onclick="openModal(14);return false;"><i class="fa fa-expand"></i> Details</a></div>
+      </div>
+    </div>
+
+    <!-- ── 16 ── -->
+    <!-- PROJECT IMAGE 16: Weather Station -->
+    <div class="project-card" data-category="iot embedded" data-index="15">
+      <div class="project-img-wrap">
+        <div class="project-img-placeholder">
+          <i class="fa fa-cloud-sun"></i>
+          <span>BME280 · ESP32 · Web Dashboard</span>
+          <span class="img-hint">[ Add image: postimages.org → direct link ]</span>
+        </div>
+        <span class="project-category-badge badge-iot">IoT</span>
+      </div>
+      <div class="project-body">
+        <div class="project-title">IoT Weather Station</div>
+        <p class="project-desc">Real-time weather monitoring station using BME280 (temperature, humidity, pressure, altitude) with ESP32, local web server dashboard, and historical trend logging over Wi-Fi.</p>
+        <div class="project-tech"><span>BME280</span><span>ESP32</span><span>Web Server</span><span>Wi-Fi</span><span>Charts.js</span></div>
+        <div class="project-links"><a href="#" class="project-link" onclick="openModal(15);return false;"><i class="fa fa-expand"></i> Details</a></div>
+      </div>
+    </div>
+
+    <!-- ── 17 ── -->
+    <!-- PROJECT IMAGE 17: Gas Detector -->
+    <div class="project-card" data-category="iot embedded" data-index="16">
+      <div class="project-img-wrap">
+        <div class="project-img-placeholder">
+          <i class="fa fa-wind"></i>
+          <span>MQ-2 · Buzzer · SMS Alert</span>
+          <span class="img-hint">[ Add image: postimages.org → direct link ]</span>
+        </div>
+        <span class="project-category-badge badge-iot">IoT</span>
+      </div>
+      <div class="project-body">
+        <div class="project-title">Smart Gas Leakage Detector</div>
+        <p class="project-desc">MQ-2 gas sensor-based LPG/smoke detection system with buzzer alarm, exhaust-fan relay trigger, OLED ppm display, and GSM-based SMS alert to emergency contacts on threshold breach.</p>
+        <div class="project-tech"><span>MQ-2</span><span>Arduino</span><span>GSM</span><span>Relay</span><span>OLED</span><span>Buzzer</span></div>
+        <div class="project-links"><a href="#" class="project-link" onclick="openModal(16);return false;"><i class="fa fa-expand"></i> Details</a></div>
+      </div>
+    </div>
+
+    <!-- ── 18 ── -->
+    <!-- PROJECT IMAGE 18: Soil NPK Monitor -->
+    <div class="project-card" data-category="iot research" data-index="17">
+      <div class="project-img-wrap">
+        <div class="project-img-placeholder">
+          <i class="fa fa-flask"></i>
+          <span>RS-485 · Modbus · Agri-IoT</span>
+          <span class="img-hint">[ Add image: postimages.org → direct link ]</span>
+        </div>
+        <span class="project-category-badge badge-research">Research</span>
+      </div>
+      <div class="project-body">
+        <div class="project-title">Soil NPK &amp; Moisture IoT Monitor</div>
+        <p class="project-desc">Agricultural IoT node using RS-485 Modbus NPK sensor with ESP32 for real-time soil nutrient (N, P, K), moisture, and pH monitoring. Uploads to cloud dashboard with fertilizer recommendation logic.</p>
+        <div class="project-tech"><span>RS-485</span><span>Modbus</span><span>NPK Sensor</span><span>ESP32</span><span>MQTT</span></div>
+        <div class="project-links"><a href="#" class="project-link" onclick="openModal(17);return false;"><i class="fa fa-expand"></i> Details</a></div>
+      </div>
+    </div>
+
+    <!-- ── 19 ── -->
+    <!-- PROJECT IMAGE 19: Servo Arm -->
+    <div class="project-card" data-category="embedded" data-index="18">
+      <div class="project-img-wrap">
+        <div class="project-img-placeholder">
+          <i class="fa fa-hand-rock"></i>
+          <span>6-DOF · Servo · I2C · Joystick</span>
+          <span class="img-hint">[ Add image: postimages.org → direct link ]</span>
+        </div>
+        <span class="project-category-badge badge-embedded">Embedded</span>
+      </div>
+      <div class="project-body">
+        <div class="project-title">6-DOF Robotic Arm</div>
+        <p class="project-desc">Six-degrees-of-freedom servo robotic arm controlled via joystick input and PCA9685 I2C servo driver. Supports manual control mode and pre-programmed motion sequences for pick-and-place tasks.</p>
+        <div class="project-tech"><span>PCA9685</span><span>I2C</span><span>6× MG996R</span><span>Joystick</span><span>Arduino</span></div>
+        <div class="project-links"><a href="#" class="project-link" onclick="openModal(18);return false;"><i class="fa fa-expand"></i> Details</a></div>
+      </div>
+    </div>
+
+    <!-- ── 20 ── -->
+    <!-- PROJECT IMAGE 20: ML Crop Disease -->
+    <div class="project-card" data-category="aiml research" data-index="19">
+      <div class="project-img-wrap">
+        <div class="project-img-placeholder">
+          <i class="fa fa-leaf"></i>
+          <span>CNN · scikit-learn · Image Classification</span>
+          <span class="img-hint">[ Add image: postimages.org → direct link ]</span>
+        </div>
+        <span class="project-category-badge badge-aiml">AI / ML</span>
+      </div>
+      <div class="project-body">
+        <div class="project-title">Crop Disease Detection (ML)</div>
+        <p class="project-desc">Supervised ML pipeline for plant disease classification from leaf images using Python, OpenCV, and scikit-learn. Feature engineering + SVM classifier achieving 89% validation accuracy on PlantVillage dataset.</p>
+        <div class="project-tech"><span>Python</span><span>OpenCV</span><span>scikit-learn</span><span>SVM</span><span>pandas</span></div>
+        <div class="project-links"><a href="#" class="project-link" onclick="openModal(19);return false;"><i class="fa fa-expand"></i> Details</a></div>
+      </div>
+    </div>
+
+    <!-- ── 21 ── -->
+    <!-- PROJECT IMAGE 21: Digital Clock -->
+    <div class="project-card" data-category="embedded" data-index="20">
+      <div class="project-img-wrap">
+        <div class="project-img-placeholder">
+          <i class="fa fa-clock"></i>
+          <span>DS3231 · I2C · OLED · RTC</span>
+          <span class="img-hint">[ Add image: postimages.org → direct link ]</span>
+        </div>
+        <span class="project-category-badge badge-embedded">Embedded</span>
+      </div>
+      <div class="project-body">
+        <div class="project-title">RTC Digital Clock &amp; Alarm</div>
+        <p class="project-desc">Precision real-time clock with DS3231 RTC module, OLED display, configurable alarm with buzzer output, battery backup, and temperature readout from the DS3231 internal sensor.</p>
+        <div class="project-tech"><span>DS3231</span><span>I2C</span><span>OLED</span><span>Arduino</span><span>RTC</span><span>Buzzer</span></div>
+        <div class="project-links"><a href="#" class="project-link" onclick="openModal(20);return false;"><i class="fa fa-expand"></i> Details</a></div>
+      </div>
+    </div>
+
+    <!-- ── 22 ── -->
+    <!-- PROJECT IMAGE 22: Blynk Home Automation -->
+    <div class="project-card" data-category="iot embedded" data-index="21">
+      <div class="project-img-wrap">
+        <div class="project-img-placeholder">
+          <i class="fa fa-home"></i>
+          <span>ESP32 · Blynk · 4-Channel Relay</span>
+          <span class="img-hint">[ Add image: postimages.org → direct link ]</span>
+        </div>
+        <span class="project-category-badge badge-iot">IoT</span>
+      </div>
+      <div class="project-body">
+        <div class="project-title">Home Automation System (Blynk)</div>
+        <p class="project-desc">4-channel relay home automation controller using ESP32 and Blynk 2.0 app. Supports remote device control over Wi-Fi with manual override switches, status feedback, and scheduled automation rules.</p>
+        <div class="project-tech"><span>ESP32</span><span>Blynk 2.0</span><span>4-Ch Relay</span><span>Wi-Fi</span><span>MQTT</span></div>
+        <div class="project-links"><a href="#" class="project-link" onclick="openModal(21);return false;"><i class="fa fa-expand"></i> Details</a></div>
+      </div>
+    </div>
+
+    <!-- ── 23 ── -->
+    <!-- PROJECT IMAGE 23: Frequency Counter -->
+    <div class="project-card" data-category="embedded pcb" data-index="22">
+      <div class="project-img-wrap">
+        <div class="project-img-placeholder">
+          <i class="fa fa-wave-square"></i>
+          <span>Timer Interrupts · LCD · Signal Measurement</span>
+          <span class="img-hint">[ Add image: postimages.org → direct link ]</span>
+        </div>
+        <span class="project-category-badge badge-pcb">PCB Design</span>
+      </div>
+      <div class="project-body">
+        <div class="project-title">Digital Frequency Counter</div>
+        <p class="project-desc">Hardware frequency counter using Arduino timer interrupts and zero-crossing detection. Measures 1Hz–1MHz signals with LCD display readout and custom PCB for clean signal conditioning.</p>
+        <div class="project-tech"><span>Arduino</span><span>Timer ISR</span><span>LCD 16×2</span><span>Zero-Cross</span><span>PCB</span></div>
+        <div class="project-links"><a href="#" class="project-link" onclick="openModal(22);return false;"><i class="fa fa-expand"></i> Details</a></div>
+      </div>
+    </div>
+
+    <!-- ── 24 ── -->
+    <!-- PROJECT IMAGE 24: Python To-Do App -->
+    <div class="project-card" data-category="aiml" data-index="23">
+      <div class="project-img-wrap">
+        <div class="project-img-placeholder">
+          <i class="fab fa-python"></i>
+          <span>Python · Tkinter · GUI</span>
+          <span class="img-hint">[ Add image: postimages.org → direct link ]</span>
+        </div>
+        <span class="project-category-badge badge-aiml">Python</span>
+      </div>
+      <div class="project-body">
+        <div class="project-title">Tkinter GUI Suite (CodSoft)</div>
+        <p class="project-desc">Collection of Tkinter GUI applications built during CodSoft internship: To-Do List with CRUD &amp; persistence, Calculator with expression parser, and Contact Book with search &amp; CSV export.</p>
+        <div class="project-tech"><span>Python</span><span>Tkinter</span><span>CSV</span><span>GUI Design</span></div>
+        <div class="project-links"><a href="#" class="project-link" onclick="openModal(23);return false;"><i class="fa fa-expand"></i> Details</a></div>
+      </div>
+    </div>
+
+    <!-- ── 25 ── -->
+    <!-- PROJECT IMAGE 25: Bidirectional Visitor Counter -->
+    <div class="project-card" data-category="embedded" data-index="24">
+      <div class="project-img-wrap">
+        <div class="project-img-placeholder">
+          <i class="fa fa-people-arrows"></i>
+          <span>IR Sensors · Counter · 7-Segment</span>
+          <span class="img-hint">[ Add image: postimages.org → direct link ]</span>
+        </div>
+        <span class="project-category-badge badge-embedded">Embedded</span>
+      </div>
+      <div class="project-body">
+        <div class="project-title">Bidirectional Visitor Counter</div>
+        <p class="project-desc">Dual IR beam-break sensor system counting people entering and exiting a room with live 7-segment display, automatic light control relay, and serial logging for occupancy data.</p>
+        <div class="project-tech"><span>Arduino</span><span>IR Sensors</span><span>7-Segment</span><span>Relay</span><span>Counter Logic</span></div>
+        <div class="project-links"><a href="#" class="project-link" onclick="openModal(24);return false;"><i class="fa fa-expand"></i> Details</a></div>
+      </div>
+    </div>
+
+    <!-- ── 26 ── -->
+    <!-- PROJECT IMAGE 26: EEG Signal Processing -->
+    <div class="project-card" data-category="aiml research" data-index="25">
+      <div class="project-img-wrap">
+        <div class="project-img-placeholder">
+          <i class="fa fa-brain"></i>
+          <span>MATLAB · FFT · Signal Analysis</span>
+          <span class="img-hint">[ Add image: postimages.org → direct link ]</span>
+        </div>
+        <span class="project-category-badge badge-research">Research</span>
+      </div>
+      <div class="project-body">
+        <div class="project-title">EEG Signal Processing &amp; Band Analysis</div>
+        <p class="project-desc">MATLAB-based EEG signal processing pipeline: bandpass filtering (delta, theta, alpha, beta), FFT spectral analysis, artifact removal, and feature extraction for mental state classification study.</p>
+        <div class="project-tech"><span>MATLAB</span><span>FFT</span><span>Bandpass Filter</span><span>Signal Processing</span></div>
+        <div class="project-links"><a href="#" class="project-link" onclick="openModal(25);return false;"><i class="fa fa-expand"></i> Details</a></div>
+      </div>
+    </div>
+
+    <!-- ── 27 ── -->
+    <!-- PROJECT IMAGE 27: PWM Motor Speed Controller -->
+    <div class="project-card" data-category="embedded power" data-index="26">
+      <div class="project-img-wrap">
+        <div class="project-img-placeholder">
+          <i class="fa fa-sliders-h"></i>
+          <span>PWM · Potentiometer · L298N</span>
+          <span class="img-hint">[ Add image: postimages.org → direct link ]</span>
+        </div>
+        <span class="project-category-badge badge-power">Power Electronics</span>
+      </div>
+      <div class="project-body">
+        <div class="project-title">PWM DC Motor Speed Controller</div>
+        <p class="project-desc">Analog potentiometer → ADC → variable PWM duty-cycle motor speed controller using L298N H-bridge, with real-time RPM display via encoder feedback and OLED readout.</p>
+        <div class="project-tech"><span>Arduino</span><span>PWM</span><span>L298N</span><span>Encoder</span><span>OLED</span></div>
+        <div class="project-links"><a href="#" class="project-link" onclick="openModal(26);return false;"><i class="fa fa-expand"></i> Details</a></div>
+      </div>
+    </div>
+
+  </div><!-- /projects-grid -->
 </section>
 
+<!-- ═══════════════════════════════════════════
+     EDUCATION  (degree only + CGPA once)
+     + COMBINED Certifications & Achievements
+═══════════════════════════════════════════ -->
 <section id="education">
-<h2>Education & <span class="highlight">Achievements</span></h2>
-<div class="grid skills-grid">
+  <div class="section-header">
+    <span class="section-tag">05 // EDUCATION</span>
+    <h2 class="section-title">Education, Certifications <span class="accent">&amp; Achievements</span></h2>
+    <div class="section-line"></div>
+  </div>
 
-<div class="card">
-<h3>B.Tech – E&TC Engineering (2023–2027)</h3>
-<p>Pimpri Chinchwad College of Engineering<br>CGPA: 8.91/10</p>
-</div>
+  <!-- Degree card only (no HSC/SSC) -->
+  <div style="max-width:700px;">
+    <div class="edu-card reveal-item">
+      <div class="edu-icon"><i class="fa fa-graduation-cap"></i></div>
+      <h3>B.Tech – Electronics &amp; Telecommunication Engineering</h3>
+      <div class="edu-sub">Pimpri Chinchwad College of Engineering, Pune (PCET) · Autonomous · SPPU Affiliated</div>
+      <span class="edu-years">Aug 2023 – June 2027</span>
 
-<div class="card">
-<h3>Certifications & Recognitions</h3>
-<p>
-Prompt Engineering – Infosys<br>
-PCB Designing – Altium Education<br>
-Remote Sensing & GIS – ISRO-IIRS<br>
-Foundations of Drone Technology – Skill India<br>
-Qualified 2nd Round – SPPU Avishkar 2024<br>
-Mini Project Winner – PCCoE Pune<br>
-TCS iON Career Edge – Young Professional
-</p>
-</div>
+      <div class="cgpa-bar-wrap">
+        <div class="cgpa-bar-label"><span>Cumulative GPA</span><span>8.91 / 10</span></div>
+        <div class="cgpa-bar"><div class="cgpa-bar-fill" data-width="89.1"></div></div>
+      </div>
 
-</div>
+      <div style="margin-top:16px;font-size:0.82rem;color:var(--muted);line-height:1.7;">
+        <strong style="color:var(--text);">Key Coursework:</strong>
+        Embedded Systems Design · ADAS &amp; Sensor Fusion · Altium PCB Design · Digital Signal Processing ·
+        Real-Time Operating Systems · Power Electronics · IoT &amp; AIML Integration · MATLAB &amp; Simulink
+      </div>
+    </div>
+  </div>
+
+  <!-- ── CERTIFICATIONS ── -->
+  <div class="sub-section-title">Certifications &amp; Licenses</div>
+  <div class="certs-achievements-grid">
+
+    <div class="ca-card">
+      <div class="ca-icon cert-color"><i class="fa fa-robot"></i></div>
+      <div>
+        <div class="ca-name">Prompt Engineering for Everyone</div>
+        <div class="ca-issuer">Infosys Springboard · May 2025</div>
+      </div>
+      <span class="ca-type-pill pill-cert">CERT</span>
+    </div>
+
+    <div class="ca-card">
+      <div class="ca-icon cert-color"><i class="fa fa-drafting-compass"></i></div>
+      <div>
+        <div class="ca-name">PCB Design Fundamentals</div>
+        <div class="ca-issuer">Altium Education · Feb 2025</div>
+      </div>
+      <span class="ca-type-pill pill-cert">CERT</span>
+    </div>
+
+    <div class="ca-card">
+      <div class="ca-icon cert-color"><i class="fa fa-satellite"></i></div>
+      <div>
+        <div class="ca-name">Remote Sensing &amp; GIS</div>
+        <div class="ca-issuer">ISRO – IIRS Online · Jan 2025</div>
+      </div>
+      <span class="ca-type-pill pill-cert">CERT</span>
+    </div>
+
+    <div class="ca-card">
+      <div class="ca-icon cert-color"><i class="fa fa-microchip"></i></div>
+      <div>
+        <div class="ca-name">Embedded Systems for Beginners</div>
+        <div class="ca-issuer">NIELIT, Govt. of India · Aug 2025</div>
+      </div>
+      <span class="ca-type-pill pill-cert">CERT</span>
+    </div>
+
+    <div class="ca-card">
+      <div class="ca-icon cert-color"><i class="fa fa-helicopter"></i></div>
+      <div>
+        <div class="ca-name">Foundations of Drone Technology</div>
+        <div class="ca-issuer">NSDC / Skill India · Nov 2024</div>
+      </div>
+      <span class="ca-type-pill pill-cert">CERT</span>
+    </div>
+
+    <div class="ca-card">
+      <div class="ca-icon cert-color"><i class="fa fa-briefcase"></i></div>
+      <div>
+        <div class="ca-name">TCS iON Career Edge — Young Professional</div>
+        <div class="ca-issuer">Tata Consultancy Services · Dec 2023</div>
+      </div>
+      <span class="ca-type-pill pill-cert">CERT</span>
+    </div>
+
+    <div class="ca-card">
+      <div class="ca-icon cert-color"><i class="fa fa-chart-line"></i></div>
+      <div>
+        <div class="ca-name">MATLAB Onramp</div>
+        <div class="ca-issuer">MathWorks · 2024</div>
+      </div>
+      <span class="ca-type-pill pill-cert">CERT</span>
+    </div>
+
+    <div class="ca-card">
+      <div class="ca-icon cert-color"><i class="fa fa-project-diagram"></i></div>
+      <div>
+        <div class="ca-name">Simulink Onramp</div>
+        <div class="ca-issuer">MathWorks · 2024</div>
+      </div>
+      <span class="ca-type-pill pill-cert">CERT</span>
+    </div>
+
+    <div class="ca-card">
+      <div class="ca-icon cert-color"><i class="fa fa-plane"></i></div>
+      <div>
+        <div class="ca-name">Basics of Drone Technology</div>
+        <div class="ca-issuer">Skill India / NSDC · 2024</div>
+      </div>
+      <span class="ca-type-pill pill-cert">CERT</span>
+    </div>
+
+  </div>
+
+  <!-- ── ACHIEVEMENTS ── -->
+  <div class="sub-section-title">Awards &amp; Recognitions</div>
+  <div class="certs-achievements-grid">
+
+    <div class="ca-card">
+      <div class="ca-icon ach-purple"><i class="fa fa-copyright"></i></div>
+      <div>
+        <div class="ca-name">Copyright — Laboratory Power Supply</div>
+        <div class="ca-issuer">Govt. of India · ID: L-154646/2024</div>
+      </div>
+      <span class="ca-type-pill pill-copy">COPYRIGHT</span>
+    </div>
+
+    <div class="ca-card">
+      <div class="ca-icon ach-purple"><i class="fa fa-copyright"></i></div>
+      <div>
+        <div class="ca-name">Copyright — Smart Health Monitoring System</div>
+        <div class="ca-issuer">Govt. of India · ID: LD-20260181601</div>
+      </div>
+      <span class="ca-type-pill pill-copy">COPYRIGHT</span>
+    </div>
+
+    <div class="ca-card">
+      <div class="ca-icon ach-gold"><i class="fa fa-trophy"></i></div>
+      <div>
+        <div class="ca-name">Mini Project Winner</div>
+        <div class="ca-issuer">PCCoE Internal Technical Competition · Jan 2026</div>
+      </div>
+      <span class="ca-type-pill pill-ach">AWARD</span>
+    </div>
+
+    <div class="ca-card">
+      <div class="ca-icon ach-silver"><i class="fa fa-medal"></i></div>
+      <div>
+        <div class="ca-name">SPPU Avishkar 2024 — 2nd Round Qualified</div>
+        <div class="ca-issuer">Engineering &amp; Technology Category · State Level</div>
+      </div>
+      <span class="ca-type-pill pill-ach">AWARD</span>
+    </div>
+
+    <div class="ca-card">
+      <div class="ca-icon ach-gold"><i class="fa fa-star"></i></div>
+      <div>
+        <div class="ca-name">Jignyasa National Level — Top 10</div>
+        <div class="ca-issuer">Agastya International Foundation · Dec 2019</div>
+      </div>
+      <span class="ca-type-pill pill-ach">AWARD</span>
+    </div>
+
+    <div class="ca-card">
+      <div class="ca-icon ach-green"><i class="fa fa-certificate"></i></div>
+      <div>
+        <div class="ca-name">TCS iON Young Professional</div>
+        <div class="ca-issuer">TCS Career Edge Certification · Dec 2023</div>
+      </div>
+      <span class="ca-type-pill pill-ach">AWARD</span>
+    </div>
+
+  </div>
 </section>
 
+<!-- ═══════════════════════════════════════════
+     CONTACT
+═══════════════════════════════════════════ -->
 <section id="contact">
-<h2>Contact <span class="highlight">Me</span></h2>
-<div class="contact-grid">
-<div>
-<p>Email: gandhishubhang09@gmail.com</p>
-<p>Phone: +91 8180002836</p>
-<p>Location: Pune, Maharashtra, India</p>
-</div>
-
-<div>
-<form action="https://formsubmit.co/gandhishubhang09@gmail.com" method="POST">
-
-    <!-- Disable captcha -->
-    <input type="hidden" name="_captcha" value="false">
-
-    <!-- Redirect after submit -->
-    <input type="hidden" name="_next" value="https://shubhanggandhi.github.io/gandhishubhang09/#contact">
-
-    <input type="text" name="name" placeholder="Your Name" required>
-
-    <input type="email" name="email" placeholder="Your Email" required>
-
-    <textarea name="message" placeholder="Your Message" required></textarea>
-
-    <button type="submit">Send Message</button>
-
-</form>
-
-</div>
-</div>
+  <div class="section-header">
+    <span class="section-tag">06 // CONTACT</span>
+    <h2 class="section-title">Let's <span class="accent">Connect</span></h2>
+    <div class="section-line"></div>
+    <p class="section-desc">Open to internships, research collaborations, and engineering project discussions.</p>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-info">
+      <a href="mailto:gandhishubhang09@gmail.com" class="contact-item">
+        <div class="contact-item-icon"><i class="fa fa-envelope"></i></div>
+        <div><div class="contact-item-label">Email</div><div class="contact-item-value">gandhishubhang09@gmail.com</div></div>
+      </a>
+      <a href="tel:+918180002836" class="contact-item">
+        <div class="contact-item-icon"><i class="fa fa-phone"></i></div>
+        <div><div class="contact-item-label">Phone</div><div class="contact-item-value">+91 8180002836</div></div>
+      </a>
+      <a href="https://linkedin.com/in/shubhang-gandhi" target="_blank" class="contact-item">
+        <div class="contact-item-icon"><i class="fab fa-linkedin-in"></i></div>
+        <div><div class="contact-item-label">LinkedIn</div><div class="contact-item-value">linkedin.com/in/shubhang-gandhi</div></div>
+      </a>
+      <a href="https://github.com/shubhanggandhi" target="_blank" class="contact-item">
+        <div class="contact-item-icon"><i class="fab fa-github"></i></div>
+        <div><div class="contact-item-label">GitHub</div><div class="contact-item-value">github.com/shubhanggandhi</div></div>
+      </a>
+      <a href="https://shubhanggandhi.github.io/gandhishubhang09/" target="_blank" class="contact-item">
+        <div class="contact-item-icon"><i class="fa fa-globe"></i></div>
+        <div><div class="contact-item-label">Portfolio Website</div><div class="contact-item-value">shubhanggandhi.github.io</div></div>
+      </a>
+      <div class="contact-item" style="cursor:default;">
+        <div class="contact-item-icon"><i class="fa fa-map-marker-alt"></i></div>
+        <div><div class="contact-item-label">Location</div><div class="contact-item-value">Pune, Maharashtra, India</div></div>
+      </div>
+    </div>
+    <div class="contact-form">
+      <form action="https://formsubmit.co/gandhishubhang09@gmail.com" method="POST">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_next" value="https://shubhanggandhi.github.io/gandhishubhang09/#contact">
+        <div class="form-row">
+          <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your Name" required class="form-control"></div>
+          <div class="form-group"><label>Email</label><input type="email" name="email" placeholder="your@email.com" required class="form-control"></div>
+        </div>
+        <div class="form-group"><label>Subject</label><input type="text" name="subject" placeholder="Internship Opportunity / Collaboration" class="form-control"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell me about the opportunity or project..." required class="form-control"></textarea></div>
+        <button type="submit" class="btn-submit"><i class="fa fa-paper-plane"></i> Send Message</button>
+      </form>
+    </div>
+  </div>
 </section>
 
+<!-- FOOTER -->
 <footer>
-© 2026 Shubhang Gandhi | Electronics & Telecommunication Engineer
+  <div class="footer-inner">
+    <div class="footer-logo">|| श्री गुरुदेव दत्त ||</div>
+    <div class="footer-links">
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+      <a href="https://linkedin.com/in/shubhang-gandhi" target="_blank">LinkedIn</a>
+    </div>
+  </div>
+  <div class="footer-copy">
+    © 2026 <span>Shubhang Shrikant Gandhi</span> · B.Tech E&amp;TC · PCCoE Pune · Engineered with passion for embedded systems
+  </div>
 </footer>
 
+<button id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">
+  <i class="fa fa-chevron-up"></i>
+</button>
+
+<!-- ═══════════════════════════════════════════
+     JAVASCRIPT
+═══════════════════════════════════════════ -->
 <script>
-// Typing effect
-const text="Electronics & Telecommunication Engineer • Hardware • IoT • AI/ML";
-let i=0;
-function type(){
-if(i<text.length){
-document.getElementById("typing").innerHTML+=text.charAt(i);
-i++;
-setTimeout(type,50);
-}}
-type();
+/* ── PROJECT DATA (27 entries) ── */
+const projects = [
+  /* 00 */ {
+    title:"ESP32-CAM Offline Face Recognition System",
+    category:"AI / ML · Embedded Systems",date:"Jan 2026 – Mar 2026",
+    problem:"Cloud-dependent access-control systems suffer from high inference latency, privacy vulnerabilities, and unreliable operation in low-connectivity environments.",
+    solution:"Developed a fully offline edge-AI embedded access-control platform using ESP32-CAM and FreeRTOS for real-time on-device inference.",
+    bullets:["CNN-based face detection using quantized INT8 FaceNet inference models optimized for constrained embedded hardware.",
+      "Dual-core firmware scheduling separating Wi-Fi streaming, image acquisition, and inference pipelines.",
+      "Integrated OV3660 camera, OLED display, flash-based storage, relay actuation, and embedded web dashboard.",
+      "96% recognition accuracy with 126ms average inference latency."],
+    tech:["ESP32-CAM","FreeRTOS","FaceNet INT8","OV3660","OLED","Relay","Wi-Fi","Embedded C"],badge:"badge-aiml"
+  },
+  /* 01 */ {
+    title:"Innovative Laboratory Power Supply",
+    category:"Power Electronics · PCB Design",date:"2024 (Copyright Registered)",
+    problem:"Academic lab power supplies lack robust protection, stable regulation, and real-time instrumentation.",
+    solution:"Designed a regulated lab-grade power supply with adjustable voltage and current-limiting and comprehensive protection.",
+    bullets:["Over-voltage, over-current, short-circuit, reverse-polarity, and thermal-shutdown protection circuits.",
+      "Optimized Zero-PCB grounding topology and thermal dissipation pathways.",
+      "Low-noise power-distribution architecture for stable output regulation.",
+      "Copyright Registered — Govt. of India (ID: L-154646/2024)."],
+    tech:["PCB Design","Altium","Regulation","MOSFET","Protection Circuits","Thermal Design"],badge:"badge-power"
+  },
+  /* 02 */ {
+    title:"Smart Health Monitoring System",
+    category:"IoT · Embedded Systems",date:"May 2025 – Jul 2025",
+    problem:"Low-cost healthcare monitors provide limited emergency-response capability and poor real-time physiological monitoring.",
+    solution:"Portable IoT-based physiological monitoring platform with emergency-alert architecture and guardian notification.",
+    bullets:["MAX30100 pulse-oximeter and BMP180 for SpO2, heart rate, and temperature monitoring.",
+      "Optimized embedded power management for Li-ion battery and continuous sensing.",
+      "Compact instrumentation for real-time physiological parameter acquisition.",
+      "Copyright Registered — Govt. of India (ID: LD-20260181601)."],
+    tech:["ESP32","MAX30100","BMP180","Li-ion","SMS Alerts","IoT Dashboard"],badge:"badge-iot"
+  },
+  /* 03 */ {
+    title:"Blind Guidance System",
+    category:"Research · Embedded Systems",date:"May 2025 – Feb 2026",
+    problem:"Visually impaired individuals lack real-time spatial awareness tools for navigation in unstructured environments.",
+    solution:"Embedded assistive-navigation system for real-time obstacle localization and directional hazard detection.",
+    bullets:["Dual HC-SR04 ultrasonic modules for 3D obstacle mapping and direction detection.",
+      "Interrupt-driven embedded control logic with low-latency distance acquisition pipelines.",
+      "Calibration, noise filtering, and real-time signal processing for accuracy.",
+      "Hardware-software co-design with haptic/audio feedback output."],
+    tech:["Arduino Nano","HC-SR04","Sensor Fusion","Interrupt Logic","Signal Processing"],badge:"badge-research"
+  },
+  /* 04 */ {
+    title:"2-Axis CNC Plotter Machine",
+    category:"Embedded Systems · Motion Control",date:"May 2024 – Jul 2024",
+    problem:"Standard 2D plotting requires expensive CNC machines; academia needs a low-cost, precise alternative.",
+    solution:"G-code CNC plotter using Arduino UNO and GRBL firmware for precision 2D drawing.",
+    bullets:["NEMA17 stepper motors with A4988 drivers for calibrated microstepping.",
+      "SG90 servo for Z-axis pen control with smooth motion transitions.",
+      "±0.9mm positional accuracy through calibration and motion control.",
+      "Compatible with standard G-code from CAD software."],
+    tech:["Arduino UNO","GRBL","NEMA17","A4988","SG90","G-Code"],badge:"badge-embedded"
+  },
+  /* 05 */ {
+    title:"SafeNet — Emergency Safety Monitoring",
+    category:"IoT · Embedded Systems",date:"Jul 2025 – Sep 2026",
+    problem:"Emergency situations require instant communication and location tracking that standard devices often fail to provide.",
+    solution:"Multi-sensor emergency monitoring platform with real-time SMS alert and GPS location tracking.",
+    bullets:["ESP32 with GSM, GPS, and motion detection for multi-sensor emergency detection.",
+      "Interrupt-driven emergency alert for immediate distress detection.",
+      "SMS-based notification with real-time GPS coordinates to emergency contacts.",
+      "Failsafe interrupt architecture for low-latency response."],
+    tech:["ESP32","GSM","GPS","Motion Sensors","SMS","Interrupt-Driven"],badge:"badge-iot"
+  },
+  /* 06 */ {
+    title:"Gesture-to-Servo Command Mapping",
+    category:"Embedded Systems · AI / ML",date:"2024",
+    problem:"Physical contact with control panels raises hygiene concerns and limits assistive robotics applications.",
+    solution:"Contactless gesture-controlled system mapping hand movements to servo motor actions using MATLAB/Simulink.",
+    bullets:["Vision-based gesture recognition with real-time classification.",
+      "MATLAB/Simulink control loop for deterministic servo actuation.",
+      "Applicable to contactless HMI, assistive robotics, and industrial automation.",
+      "Smooth motion mapping with minimal latency."],
+    tech:["MATLAB","Simulink","Servo","Gesture Recognition","Control Loop"],badge:"badge-aiml"
+  },
+  /* 07 */ {
+    title:"Mini DC-to-AC Inverter",
+    category:"Power Electronics",date:"2019",
+    problem:"Understanding DC-to-AC power conversion fundamentals through a practical embedded power project.",
+    solution:"DC-to-AC mini inverter using oscillator-driven MOSFET switching for low-power AC output.",
+    bullets:["Oscillator-driven MOSFET switching for AC waveform generation.",
+      "Transformer-based voltage amplification for output level adjustment.",
+      "Covers switching control, power conversion, and waveform analysis."],
+    tech:["MOSFET","Oscillator","Transformer","Power Conversion","Switching Control"],badge:"badge-power"
+  },
+  /* 08 */ {
+    title:"Wireless Surveillance Camera",
+    category:"IoT · Embedded Systems",date:"2024",
+    problem:"Budget-friendly wireless surveillance for academic labs and home environments.",
+    solution:"ESP32-CAM IoT surveillance camera with local Wi-Fi streaming via embedded HTTP server.",
+    bullets:["ESP32-CAM with OV2640 camera for video capture.",
+      "Embedded HTTP server for real-time web dashboard streaming.",
+      "Wi-Fi access without external cloud dependencies.",
+      "Low-power design for continuous monitoring."],
+    tech:["ESP32-CAM","OV2640","Wi-Fi","HTTP Server","IoT"],badge:"badge-iot"
+  },
+  /* 09 */ {
+    title:"Smart Irrigation System",
+    category:"IoT · Embedded Systems",date:"2024",
+    problem:"Manual irrigation wastes water and labor; automated sensing enables precision agriculture.",
+    solution:"Automated soil-moisture sensing irrigation controller with remote monitoring via Blynk.",
+    bullets:["Capacitive soil moisture sensors for accurate soil-state measurement.",
+      "Relay-driven pump with auto-activation on configurable moisture thresholds.",
+      "Blynk cloud dashboard for remote override and real-time monitoring.",
+      "Low-power ESP32 deep-sleep design for solar-powered deployment."],
+    tech:["ESP32","Soil Sensor","Relay","Blynk","MQTT"],badge:"badge-iot"
+  },
+  /* 10 */ {
+    title:"RFID-Based Access Control System",
+    category:"Embedded Systems",date:"2024",
+    problem:"Physical key-based access control is insecure and untrackable in academic lab environments.",
+    solution:"Card-based security system using MFRC522 RFID with whitelist stored in EEPROM.",
+    bullets:["MFRC522 RFID module reads UID from ISO 14443 cards/fobs.",
+      "Authorized UID whitelist persisted in Arduino EEPROM for power-cycle resilience.",
+      "Relay-controlled door lock with buzzer alert and OLED feedback display.",
+      "Serial log output for access audit trail."],
+    tech:["MFRC522","Arduino","RFID","EEPROM","OLED","Relay"],badge:"badge-embedded"
+  },
+  /* 11 */ {
+    title:"IoT Temperature & Humidity Logger",
+    category:"IoT · Embedded Systems",date:"2023",
+    problem:"Lab environments require continuous temperature-humidity monitoring with cloud-accessible historical data.",
+    solution:"DHT22-based environmental node pushing data to ThingSpeak cloud with alert triggers.",
+    bullets:["DHT22 sensor for ±0.3°C accuracy temperature and ±2% RH humidity readings.",
+      "HTTP POST to ThingSpeak at configurable intervals over Wi-Fi.",
+      "Alert trigger via email when thresholds are breached.",
+      "CSV export of historical data for analysis."],
+    tech:["DHT22","ESP8266","ThingSpeak","HTTP","Data Logging"],badge:"badge-iot"
+  },
+  /* 12 */ {
+    title:"Line-Following Robot",
+    category:"Embedded Systems",date:"2023",
+    problem:"Autonomous ground vehicle navigation for logistics, industrial, and competition robotics.",
+    solution:"5-channel IR array line-follower robot with PID control for smooth track navigation.",
+    bullets:["5-channel TCRT5000 IR array for high-resolution line detection.",
+      "PID control loop for smooth steering with minimal oscillation.",
+      "L298N dual H-bridge motor driver for independent wheel speed control.",
+      "Tunable PID constants for different track geometries."],
+    tech:["Arduino","IR Array","L298N","PID","DC Motors"],badge:"badge-embedded"
+  },
+  /* 13 */ {
+    title:"Autonomous Obstacle-Avoiding Robot",
+    category:"Embedded Systems",date:"2023",
+    problem:"Autonomous navigation in unknown environments without pre-mapped paths.",
+    solution:"Servo-mounted ultrasonic turret providing 180° scan for real-time path planning.",
+    bullets:["HC-SR04 on SG90 servo for 3-point obstacle distance measurement (left/center/right).",
+      "Real-time path selection: straight/left/right based on minimum clearance.",
+      "L298N motor driver with variable speed for smooth turns.",
+      "Serial debug mode for tuning clearance thresholds."],
+    tech:["Arduino","HC-SR04","SG90","L298N","Motor Driver"],badge:"badge-embedded"
+  },
+  /* 14 */ {
+    title:"Digital Multimeter (Arduino-Based)",
+    category:"PCB Design · Embedded Systems",date:"2024",
+    problem:"Commercial multimeters are expensive; a custom PCB solution teaches measurement fundamentals.",
+    solution:"Portable digital multimeter with ADS1115 16-bit ADC, auto-ranging, and custom PCB.",
+    bullets:["ADS1115 16-bit ADC for high-resolution voltage and current measurement.",
+      "Auto-ranging across voltage divider networks for safe input scaling.",
+      "Custom PCB with shunt resistor calibration and protection diodes.",
+      "OLED readout with units and range indicator."],
+    tech:["ADS1115","Arduino","OLED","ADC","PCB Layout"],badge:"badge-pcb"
+  },
+  /* 15 */ {
+    title:"IoT Weather Station",
+    category:"IoT · Embedded Systems",date:"2024",
+    problem:"Real-time multi-parameter environmental monitoring for campus and home automation.",
+    solution:"BME280-based weather station with ESP32 local web server and historical trend charts.",
+    bullets:["BME280 measures temperature, humidity, pressure, and estimated altitude.",
+      "ESP32 hosts a local web server with live Charts.js trend visualization.",
+      "Wi-Fi connected with mDNS for easy local hostname access.",
+      "Persistent data ring-buffer stored in SPIFFS for offline history."],
+    tech:["BME280","ESP32","Web Server","Wi-Fi","Charts.js"],badge:"badge-iot"
+  },
+  /* 16 */ {
+    title:"Smart Gas Leakage Detector",
+    category:"IoT · Embedded Systems",date:"2024",
+    problem:"Undetected LPG or smoke leaks cause fire and health hazards in kitchens and labs.",
+    solution:"MQ-2 gas sensor system with buzzer, exhaust relay, OLED display, and GSM SMS alert.",
+    bullets:["MQ-2 sensor with calibrated ppm threshold for LPG/smoke detection.",
+      "Buzzer alarm and exhaust-fan relay auto-trigger on threshold breach.",
+      "GSM module sends SMS alert with ppm level to emergency contacts.",
+      "OLED real-time ppm display and alert status indicator."],
+    tech:["MQ-2","Arduino","GSM","Relay","OLED","Buzzer"],badge:"badge-iot"
+  },
+  /* 17 */ {
+    title:"Soil NPK & Moisture IoT Monitor",
+    category:"Research · IoT",date:"2025",
+    problem:"Farmers lack affordable, real-time soil health data for precision fertilizer application.",
+    solution:"RS-485 Modbus NPK sensor with ESP32 for soil nutrient cloud monitoring.",
+    bullets:["RS-485 Modbus RTU protocol with ESP32 as master controller.",
+      "Measures N, P, K levels plus moisture and pH from single probe.",
+      "MQTT to cloud dashboard with fertilizer recommendation logic.",
+      "Battery + solar power management for field deployment."],
+    tech:["RS-485","Modbus","NPK Sensor","ESP32","MQTT"],badge:"badge-research"
+  },
+  /* 18 */ {
+    title:"6-DOF Robotic Arm",
+    category:"Embedded Systems",date:"2024",
+    problem:"Demonstrations of industrial pick-and-place robotics require affordable, programmable manipulators.",
+    solution:"6-axis servo robotic arm with PCA9685 I2C driver, joystick control, and motion sequences.",
+    bullets:["PCA9685 16-channel I2C PWM driver for precise, independent servo control.",
+      "6× MG996R high-torque servos for each degree of freedom.",
+      "Dual-axis joystick input for manual teleoperation mode.",
+      "Programmable motion sequence replay for automated pick-and-place."],
+    tech:["PCA9685","I2C","6× MG996R","Joystick","Arduino"],badge:"badge-embedded"
+  },
+  /* 19 */ {
+    title:"Crop Disease Detection (ML)",
+    category:"AI / ML · Research",date:"2025",
+    problem:"Early crop disease identification prevents yield loss; manual visual inspection is slow and error-prone.",
+    solution:"SVM-based leaf image classifier achieving 89% accuracy on PlantVillage dataset.",
+    bullets:["OpenCV for image preprocessing: resize, normalize, HSV color feature extraction.",
+      "SVM classifier with RBF kernel trained on PlantVillage 14-class subset.",
+      "Feature engineering: texture (LBP), color histograms, shape descriptors.",
+      "89% validation accuracy; confusion matrix analysis per disease class."],
+    tech:["Python","OpenCV","scikit-learn","SVM","pandas"],badge:"badge-aiml"
+  },
+  /* 20 */ {
+    title:"RTC Digital Clock & Alarm",
+    category:"Embedded Systems",date:"2023",
+    problem:"Precision timekeeping with alarm functionality for embedded projects without drift.",
+    solution:"DS3231 RTC module with OLED display, configurable alarm, and temperature readout.",
+    bullets:["DS3231 I2C RTC module for < ±2ppm drift accuracy.",
+      "OLED 128×64 display with time, date, alarm indicator, and temperature.",
+      "Configurable alarm with buzzer output and snooze function.",
+      "CR2032 battery backup for timekeeping through power loss."],
+    tech:["DS3231","I2C","OLED","Arduino","RTC","Buzzer"],badge:"badge-embedded"
+  },
+  /* 21 */ {
+    title:"Home Automation System (Blynk)",
+    category:"IoT · Embedded Systems",date:"2024",
+    problem:"Manual control of home appliances is inefficient; remote IoT control enables smart-home automation.",
+    solution:"4-channel relay home automation controller via ESP32 and Blynk 2.0 app.",
+    bullets:["4-channel relay board controlling four independent AC appliances.",
+      "Blynk 2.0 dashboard with buttons, timer widgets, and energy monitoring.",
+      "Manual override physical switches with live state feedback to app.",
+      "OTA firmware update capability for remote reconfiguration."],
+    tech:["ESP32","Blynk 2.0","4-Ch Relay","Wi-Fi","MQTT"],badge:"badge-iot"
+  },
+  /* 22 */ {
+    title:"Digital Frequency Counter",
+    category:"PCB Design · Embedded Systems",date:"2024",
+    problem:"Lab-grade frequency measurement without expensive commercial equipment.",
+    solution:"Hardware frequency counter using Arduino timer interrupts and zero-crossing detection.",
+    bullets:["Zero-crossing detection input conditioning for 1Hz–1MHz signal range.",
+      "Arduino timer ISR with gate-time measurement for accurate frequency calculation.",
+      "LCD 16×2 display with frequency, period, and duty-cycle readout.",
+      "Custom PCB for clean signal path and shielding."],
+    tech:["Arduino","Timer ISR","LCD 16×2","Zero-Cross","PCB"],badge:"badge-pcb"
+  },
+  /* 23 */ {
+    title:"Tkinter GUI Suite (CodSoft Internship)",
+    category:"Python · GUI Programming",date:"Aug 2024 – Sep 2024",
+    problem:"Practical Python application development during CodSoft internship deliverables.",
+    solution:"Three production-quality Tkinter GUI applications with persistent storage.",
+    bullets:["To-Do List: CRUD operations with task persistence via JSON file storage.",
+      "Calculator: full expression parser with keyboard input and history log.",
+      "Contact Book: search, edit, delete, and CSV export of contact records.",
+      "All three shipped as standalone .exe using PyInstaller."],
+    tech:["Python","Tkinter","JSON","CSV","PyInstaller"],badge:"badge-aiml"
+  },
+  /* 24 */ {
+    title:"Bidirectional Visitor Counter",
+    category:"Embedded Systems",date:"2023",
+    problem:"Accurate room occupancy tracking for smart building automation and energy management.",
+    solution:"Dual IR beam-break sensor system with 7-segment display and relay-controlled lighting.",
+    bullets:["Two IR beam-break sensors for entry/exit direction discrimination.",
+      "Counter logic increments on entry and decrements on exit.",
+      "7-segment display shows live occupancy count.",
+      "Relay auto-switches lights when count > 0; turns off when empty."],
+    tech:["Arduino","IR Sensors","7-Segment","Relay","Counter Logic"],badge:"badge-embedded"
+  },
+  /* 25 */ {
+    title:"EEG Signal Processing & Band Analysis",
+    category:"Research · AI / ML",date:"2025",
+    problem:"EEG signals require robust preprocessing before mental state classification is possible.",
+    solution:"MATLAB pipeline: bandpass filtering, FFT spectral analysis, and band-power feature extraction.",
+    bullets:["FIR bandpass filters isolating delta, theta, alpha, and beta EEG bands.",
+      "FFT spectral analysis with power spectral density visualization.",
+      "Artifact removal using ICA decomposition (MATLAB toolbox).",
+      "Band-power feature extraction for downstream mental state classification."],
+    tech:["MATLAB","FFT","Bandpass Filter","ICA","Signal Processing"],badge:"badge-research"
+  },
+  /* 26 */ {
+    title:"PWM DC Motor Speed Controller",
+    category:"Power Electronics · Embedded Systems",date:"2023",
+    problem:"Precise analog motor speed control for robotics and industrial drive applications.",
+    solution:"Potentiometer → ADC → variable PWM duty-cycle controller with RPM encoder feedback.",
+    bullets:["10-bit ADC on Arduino reads potentiometer for speed setpoint input.",
+      "PWM duty cycle mapped 0–100% driving L298N H-bridge for smooth speed control.",
+      "Quadrature encoder feedback for real RPM measurement.",
+      "OLED display shows setpoint %, actual RPM, and direction."],
+    tech:["Arduino","PWM","L298N","Encoder","OLED"],badge:"badge-power"
+  }
+];
 
-// Scroll reveal
+/* ── MODAL ── */
+function openModal(i){
+  const p=projects[i];
+  /* 
+    PROJECT MODAL IMAGES:
+    Each project modal has an image slot. To add your image:
+    1. Upload to postimages.org → get direct link
+    2. Find the comment "// IMG-{i}" in the HTML comments below
+    3. Replace null with "YOUR_LINK" for that project index
+    Example: projectImages[0] = "https://i.postimg.cc/abc/face-recog.jpg"
+  */
+  const projectImages = [
+    null, // 00 - ESP32-CAM Face Recognition
+    null, // 01 - Lab Power Supply
+    null, // 02 - Smart Health Monitor
+    null, // 03 - Blind Guidance System
+    null, // 04 - CNC Plotter
+    null, // 05 - SafeNet
+    null, // 06 - Gesture Servo
+    null, // 07 - Mini Inverter
+    null, // 08 - Wireless Camera
+    null, // 09 - Smart Irrigation
+    null, // 10 - RFID Access Control
+    null, // 11 - Temp Humidity Logger
+    null, // 12 - Line Follower Robot
+    null, // 13 - Obstacle Avoider
+    null, // 14 - Digital Multimeter
+    null, // 15 - Weather Station
+    null, // 16 - Gas Detector
+    null, // 17 - Soil NPK Monitor
+    null, // 18 - 6-DOF Robotic Arm
+    null, // 19 - Crop Disease ML
+    null, // 20 - RTC Clock
+    null, // 21 - Home Automation
+    null, // 22 - Frequency Counter
+    null, // 23 - Tkinter Suite
+    null, // 24 - Visitor Counter
+    null, // 25 - EEG Processing
+    null  // 26 - PWM Motor Controller
+  ];
+
+  const imgSlot = projectImages[i]
+    ? `<div class="modal-img-wrap"><img src="${projectImages[i]}" alt="${p.title}" loading="lazy"></div>`
+    : `<div class="modal-img-wrap"><div class="modal-img-placeholder"><i class="fa fa-image"></i><p>Add project image via postimages.org direct link</p></div></div>`;
+
+  document.getElementById('modal-content').innerHTML=`
+    <div class="modal-title">${p.title}</div>
+    <div class="modal-meta">
+      <span class="project-category-badge ${p.badge}" style="position:static;">${p.category}</span>
+      <span class="timeline-date">${p.date}</span>
+    </div>
+    ${imgSlot}
+    <div class="modal-section-label">Problem Statement</div>
+    <p class="modal-desc">${p.problem}</p>
+    <div class="modal-section-label">Solution</div>
+    <p class="modal-desc">${p.solution}</p>
+    <div class="modal-section-label">Key Highlights</div>
+    <ul class="timeline-desc" style="margin-bottom:16px">${p.bullets.map(b=>`<li>${b}</li>`).join('')}</ul>
+    <div class="modal-section-label">Tech Stack</div>
+    <div class="project-tech">${p.tech.map(t=>`<span>${t}</span>`).join('')}</div>
+  `;
+  document.getElementById('projectModal').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeModal(){
+  document.getElementById('projectModal').classList.remove('open');
+  document.body.style.overflow='';
+}
+document.getElementById('projectModal').addEventListener('click',function(e){if(e.target===this)closeModal();});
+
+/* ── LOADER ── */
+window.addEventListener('load',()=>{setTimeout(()=>document.getElementById('loader').classList.add('fade'),900);});
+
+/* ── TYPING EFFECT ── */
+const lines=["Embedded Systems Engineer","IoT Platform Developer","PCB & Hardware Designer","Edge AI / TinyML Builder","Power Electronics Enthusiast","MATLAB & Simulink Engineer"];
+let li=0,ci=0,del=false;
+function typeLoop(){
+  const txt=lines[li];const el=document.getElementById('typing-text');
+  if(!del){el.textContent=txt.slice(0,++ci);if(ci===txt.length){del=true;setTimeout(typeLoop,1600);return;}}
+  else{el.textContent=txt.slice(0,--ci);if(ci===0){del=false;li=(li+1)%lines.length;setTimeout(typeLoop,400);return;}}
+  setTimeout(typeLoop,del?38:62);
+}
+typeLoop();
+
+/* ── NAV + SCROLL TOP ── */
+const sections=document.querySelectorAll('section[id]');
+const navAs=document.querySelectorAll('.nav-links a:not(.nav-resume)');
+window.addEventListener('scroll',()=>{
+  const y=window.scrollY;
+  document.getElementById('scrollTop').classList.toggle('visible',y>400);
+  let cur='';
+  sections.forEach(s=>{if(y>=s.offsetTop-120)cur=s.id;});
+  navAs.forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+cur);});
+});
+
+/* ── MOBILE NAV ── */
+function toggleNav(){document.getElementById('navLinks').classList.toggle('open');}
+document.querySelectorAll('.nav-links a').forEach(a=>{a.addEventListener('click',()=>document.getElementById('navLinks').classList.remove('open'));});
+
+/* ── INTERSECTION OBSERVER ── */
 const observer=new IntersectionObserver(entries=>{
-entries.forEach(entry=>{
-if(entry.isIntersecting){
-entry.target.classList.add("show");
-}
-});
-});
-document.querySelectorAll(".card").forEach(card=>{
-observer.observe(card);
+  entries.forEach((e,idx)=>{
+    if(e.isIntersecting){
+      setTimeout(()=>e.target.classList.add('reveal'),idx*60);
+      e.target.querySelectorAll('.skill-bar-fill').forEach(b=>{b.style.width=b.dataset.width+'%';});
+      e.target.querySelectorAll('.cgpa-bar-fill').forEach(b=>{b.style.width=b.dataset.width+'%';});
+    }
+  });
+},{threshold:0.1});
+document.querySelectorAll('.skill-card,.project-card,.edu-card,.ca-card,.timeline-item,.reveal-item').forEach(el=>observer.observe(el));
+
+/* ── PROJECT FILTER ── */
+document.querySelectorAll('.filter-btn').forEach(btn=>{
+  btn.addEventListener('click',function(){
+    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+    this.classList.add('active');
+    const f=this.dataset.filter;
+    document.querySelectorAll('.project-card').forEach(card=>{
+      const cats=card.dataset.category||'';
+      if(f==='all'||cats.includes(f)){
+        card.classList.remove('hidden');
+        card.style.opacity='0';card.style.transform='translateY(30px)';
+        setTimeout(()=>{card.style.opacity='1';card.style.transform='translateY(0)';card.style.transition='opacity 0.4s,transform 0.4s';},80);
+      } else {card.classList.add('hidden');}
+    });
+  });
 });
 
-// Animate skill bars
-const skillObserver=new IntersectionObserver(entries=>{
-entries.forEach(entry=>{
-if(entry.isIntersecting){
-entry.target.style.width=entry.target.dataset.width;
-}
-});
-});
-document.querySelectorAll(".progress span").forEach(bar=>{
-skillObserver.observe(bar);
-});
+/* ── STAT COUNTER ── */
+const statObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const el=e.target;
+      const displayVal=el.dataset.display;
+      if(displayVal){el.textContent=displayVal;statObs.unobserve(el);return;}
+      const target=parseInt(el.dataset.target);let c=0;
+      const step=Math.max(1,Math.ceil(target/50));
+      const timer=setInterval(()=>{c=Math.min(c+step,target);el.textContent=c;if(c===target)clearInterval(timer);},30);
+      statObs.unobserve(el);
+    }
+  });
+},{threshold:0.5});
+document.querySelectorAll('.stat-number[data-target]').forEach(el=>statObs.observe(el));
 </script>
-
 </body>
 </html>
